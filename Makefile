@@ -18,8 +18,6 @@ OBJ := $(SRC:.c=.o)
 main: $(OBJ)
 	$(CC) -o main $(OBJ) $(CFLAGS)
 
-main.o: $(INC_PATH)/memalloc.h $(INC_PATH)/memdisplay.h
-
 memalloc.o: $(INC_PATH)/memalloc.h
 
 memfree.o: $(INC_PATH)/memfree.h
