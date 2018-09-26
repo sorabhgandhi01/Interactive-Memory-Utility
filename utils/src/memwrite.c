@@ -1,7 +1,7 @@
 /*----------------------------------------------------------------------------------------
 MIT License
 
-Copyright (c) 2018 Sorabh Gandhi / Sanju Prakash
+Copyright (c) 2018 Sorabh Gandhi / Sanju Prakash Kannioth
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE
 
 /**
  * @\file	memwrite.c
- * @\author	Sorabh Gandhi / Sanju Prakash
+ * @\author	Sorabh Gandhi / Sanju Prakash Kannioth
  * @\brief	This file contains the definition of memory write functionality of memory utils
  * @\date	09/25/2018
  *
