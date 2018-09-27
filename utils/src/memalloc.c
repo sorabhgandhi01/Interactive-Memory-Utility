@@ -38,24 +38,19 @@ SOFTWARE
 /* Own headers */
 #include "memalloc.h"
 
-int memAlloc (uint32_t n)
+mem_status allocate_memory(void *arg)
 {
-#if 0
-    uint32_t i;
-    printf("Enter the number of blocks to be allocated :\n");
-    scanf("%d", n);
-    *size = (*n)*sizeof(uint32_t);
-    uint32_t *ptr =(uint32_t*) malloc(*size);
-/*    for(i=0,j=12313;i<(*n);i++,j++){
-	ptr[i] = j;
-    }*/
-    for(i=0;i<(*n);i++){
-	scanf("%d", &ptr[i]);
-    }
+        int *a = (int *)arg;
+        //printf("a --> %d\n", *a);
 
-    for(i=0;i<(*n);i++){
-	printf("p[%d] = %d\n",i,ptr[i]);
-    }
-#endif
-    return 0;
+        g_memblock = (uint32_t *) malloc( (*a) * sizeof(uint32_t));
+
+        if (g_memblock != NULL) {
+                printf("%ld bytes of Memory Allocated and the starting address is %p \n", ((*a) * sizeof(g_memblock)), (void *)g_memblock);
+                return MEMORY_INIT_SUCCESS;
+        }
+        else {
+                printf("Memory allocation failed\n");
+                return MEMORY_INIT_FAILED;
+        }
 }

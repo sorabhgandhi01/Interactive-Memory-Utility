@@ -33,6 +33,8 @@ SOFTWARE
 #ifndef _XORINVERT_H
 #define _XORINVERT_H
 
+#include "global.h"
+
 /**
 --------------------------------------------------------------------------------------------------
 xorInvert

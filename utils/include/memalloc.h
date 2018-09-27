@@ -34,17 +34,21 @@ SOFTWARE
 #ifndef _MEMALLOC_H
 #define _MEMALLOC_H
 
+#include "global.h"
+
 /**
 --------------------------------------------------------------------------------------------
-memAlloc
+allocate_memory
 --------------------------------------------------------------------------------------------
 * This function will allocate specified number of memory blocks in heap segment
 *
-* 	@\param	n	Number of blocks of memory to be allocated
+* 	@\param	arg	Number of blocks of memory to be allocated
 *
-* 	@\return	On success it return 1, On failure the function return -1
+* 	@\return	On success it return MEMORY_INIT_SUCCESS, 
+* 			On failure the function MEMORY_INIT_FAILED
 *
 */
-int memAlloc(uint32_t n);
+mem_status allocate_memory(void *arg);
+
 
 #endif

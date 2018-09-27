@@ -33,6 +33,8 @@ SOFTWARE
 #ifndef _MEMWRITE_H
 #define _MEMWRITE_H
 
+#include "global.h"
+
 /**
 --------------------------------------------------------------------------------------------------
 memWrite

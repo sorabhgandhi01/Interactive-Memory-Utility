@@ -33,6 +33,8 @@ SOFTWARE
 #ifndef _MEMDISPLAY_H
 #define _MEMDISPLAY_H
 
+#include "global.h"
+
 /**
 --------------------------------------------------------------------------------------------------
 displaymem

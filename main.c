@@ -38,19 +38,62 @@ SOFTWARE
 #include<stdint.h>
 
 /* Own headers */
-#include"memalloc.h"
-#include"memfree.h"
-#include"memdisplay.h"
-#include"memwrite.h"
-#include"xorinvert.h"
-#include"help.h"
+#include "memalloc.h"
+#include "memfree.h"
+#include "memdisplay.h"
+#include "memwrite.h"
+#include "xorinvert.h"
+#include "help.h"
+#include "exit.h"
+
+
+typedef struct command_list_t {
+
+        const char *cmd_name;
+
+        mem_status (*function_name)(void *arg);
+
+} command_list_t;
 
 
 int main ()
 {
-	printf("Welcome \n");
+	struct command_list_t command_list[4] = {
+                
+                {"allocate", &allocate_memory},
+                {"free", &free_memory},
+                {"exit", &exit_util},
+                {NULL, NULL}
+        };
+                
+        char input[15];
+	char cmd[10];
+	char arg[6];
+        memset(input, 0, sizeof(input));
 
-	help(); //Invoking help function
+	printf("Welcome to the memory utility\n");
 
-	return 0;
+        while(1)
+        {
+                printf("Enter a fuction to call\n");
+                scanf(" %[^\n]%*c", input);
+
+                int arg1 = 0, i = 0;
+
+                memset(cmd, 0, sizeof(cmd));
+                memset(arg, 0, sizeof(arg));
+
+                sscanf(input, "%s %s", cmd, arg);
+
+                arg1 = atoi(arg);
+                //printf("cmd -> %s       arg1 -> %d\n", cmd, arg1);
+
+                for (i = 0; command_list[i].function_name; i++)
+                {
+                        if (strcmp(cmd, command_list[i].cmd_name) == 0)
+                                (*(command_list[i].function_name))((void *) &arg1);
+                }
+        }
+
+        exit(EXIT_SUCCESS);
 }

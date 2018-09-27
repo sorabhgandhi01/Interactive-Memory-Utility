@@ -33,17 +33,19 @@ SOFTWARE
 #ifndef _MEMFREE_H
 #define _MEMFREE_H
 
+#include "global.h"
+
 /**
 --------------------------------------------------------------------------------------------------
-memFree
+free_memory
 --------------------------------------------------------------------------------------------------
 * This function releases the specified memory block in the heap segment
 *
-* 	@\param	ptr	Memory address to be released
+* 	@\param	arg	Memory address to be released
 *
 * 	@\return	None
 *
 */
-void memFree(uint32_t *ptr);
+mem_status free_memory(void *arg);
 
 #endif

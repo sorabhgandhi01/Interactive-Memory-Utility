@@ -30,20 +30,12 @@ SOFTWARE
  *
  */											   
 
-/* System Headers */
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <assert.h>
-
 /* Own headers */
 #include "memfree.h"
 
-void memFree(uint32_t *ptr){
-#if 0
-    free(ptr);
-    ptr = NULL;
-    if(!ptr) 
-    printf("The memory block allocated has been successfully freed!\n");
-#endif
+mem_status free_memory(void *arg)
+{
+        free(g_memblock);
+
+        return MEMORY_CLEAR_SUCCESS;
 }
