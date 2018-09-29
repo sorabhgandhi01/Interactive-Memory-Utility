@@ -30,41 +30,33 @@ SOFTWARE
  *
  */											   
 
-/* System headers */
-#include <stdio.h>
-#include <stdint.h>
-
 /* Own headers */
 #include <memdisplay.h>
 
-void displayMem(uint32_t *userAddr, uint32_t n_block)
+mem_status read_memory(char arg1[], char arg2[])
 {
-#if 0
-    uint32_t i, index;//, dummy;
-/*    uint32_t shifter = 1;
-    for(i=0;i<(numBytes*4);i++){
-	shifter *= 2;
-    }*/
-  //  printf("Shifter value :%d\n",shifter);
-    printf("The first address of the allocated block is : %p\n",&ptr[0]);
-    printf("The last address of the allocated block is : %p\n", &ptr[n-1]);
-    for(i=0;i<n;i++){
-//	dummy = ptr[i];
-//	dummy = (dummy & (shifter-1));
-	printf("The contents of the memory in hexadecimal format is as follows: %0x\n", ptr[i]);
-    }
-    for(i=0;i<n;i++){
-	if(ptr[i] == (int)(*userAddr)){
-	    index = i;
-	    break;
-	}
-    }
-    printf("The index of the user entered value is :%d\n", index);
-    printf("User entered address is :%x\n", *userAddr);
-    for(i=index;i<=numBytes;i++){
-	printf("%x\n", ptr[i]);
-    }
-    printf("The amount of memory allocated is : %d\n",size);
-#endif
+	uint64_t useraddr = atol(arg1);
+       // uint32_t r_bytes = atoi(arg2);
+
+        uint32_t i = 0, flag = 0;
+
+        //printf("user addr = %lx data = %d       nblock --> %d   bloackptr --> %p\n", useraddr, r_bytes, g_nblock, &g_blockptr[0]);
+
+        for (i = 0; i < g_nblock; i++)
+        {
+                uint64_t *temp = (uint64_t *)&g_blockptr[i];
+                
+                if (temp == useraddr) {
+                        printf("Data at memory address %p is %d\n", temp, g_blockptr[i]);
+                        flag = 1;
+                        break;
+                }
+        }
+
+        if (flag != 1) {
+                printf("Invalid memory address\n");
+                return FAILED;
+        }
+
+	return SUCCESS;
 }
-   

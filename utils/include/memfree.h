@@ -46,6 +46,6 @@ free_memory
 * 	@\return	None
 *
 */
-mem_status free_memory(void *arg);
+mem_status free_memory();
 
 #endif

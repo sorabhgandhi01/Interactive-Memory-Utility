@@ -47,6 +47,6 @@ memWrite
 * 	@\return	None
 *
 */
-void memWrite(uint32_t addr, uint32_t data);
+mem_status write_memory(char useraddr[], char data[]);
 
 #endif

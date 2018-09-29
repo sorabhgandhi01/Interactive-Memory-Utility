@@ -47,6 +47,6 @@ displaymem
 * 	@\return	None
 *
 */
-void displayMem (uint32_t *userAddr, uint32_t n_block);
+mem_status read_memory(char arg1[], char arg2[]);
 
 #endif                                                                                            

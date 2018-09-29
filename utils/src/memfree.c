@@ -33,9 +33,9 @@ SOFTWARE
 /* Own headers */
 #include "memfree.h"
 
-mem_status free_memory(void *arg)
+mem_status free_memory()
 {
-        free(g_memblock);
+        free(g_blockptr);
 
-        return MEMORY_CLEAR_SUCCESS;
+        return SUCCESS;
 }

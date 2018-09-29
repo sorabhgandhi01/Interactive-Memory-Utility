@@ -51,24 +51,26 @@ typedef struct command_list_t {
 
         const char *cmd_name;
 
-        mem_status (*function_name)(void *arg);
+        mem_status (*function_name)(char arg1[], char arg2[]);
 
 } command_list_t;
 
 
 int main ()
 {
-	struct command_list_t command_list[4] = {
-                
+	struct command_list_t command_list[6] = {
+		{"write", &write_memory},
+		{"read", &read_memory},
                 {"allocate", &allocate_memory},
                 {"free", &free_memory},
                 {"exit", &exit_util},
                 {NULL, NULL}
         };
                 
-        char input[15];
+        char input[32];
 	char cmd[10];
-	char arg[6];
+	char c_arg1[17];
+	char c_arg2[5];
         memset(input, 0, sizeof(input));
 
 	printf("Welcome to the memory utility\n");
@@ -78,20 +80,23 @@ int main ()
                 printf("Enter a fuction to call\n");
                 scanf(" %[^\n]%*c", input);
 
-                int arg1 = 0, i = 0;
+                //uint64_t arg1 = 0;
+		//uint32_t arg2 = 0;
+	       	uint32_t i = 0;
 
                 memset(cmd, 0, sizeof(cmd));
-                memset(arg, 0, sizeof(arg));
+                memset(c_arg1, 0, sizeof(c_arg1));
+		memset(c_arg2, 0, sizeof(c_arg2));
 
-                sscanf(input, "%s %s", cmd, arg);
+                sscanf(input, "%s %s %s", cmd, c_arg1, c_arg2);
 
-                arg1 = atoi(arg);
-                //printf("cmd -> %s       arg1 -> %d\n", cmd, arg1);
+                //arg1 = atoi(c_arg1);
+		//arg2 = atoi(c_arg2);
 
                 for (i = 0; command_list[i].function_name; i++)
                 {
                         if (strcmp(cmd, command_list[i].cmd_name) == 0)
-                                (*(command_list[i].function_name))((void *) &arg1);
+                                (*(command_list[i].function_name))(c_arg1, c_arg2);
                 }
         }
 

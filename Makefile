@@ -3,7 +3,6 @@
 CC = gcc
 
 CFLAGS = -Wall \
-	 -Werror \
 	 -g \
 	 -Iutils/include/
 

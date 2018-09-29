@@ -4,6 +4,6 @@
 
 #include "global.h"
 
-mem_status exit_util(void *arg);
+mem_status exit_util();
 
 #endif

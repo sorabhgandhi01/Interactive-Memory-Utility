@@ -30,25 +30,35 @@ SOFTWARE
  *
  */											   
 
-/* System headers */
-#include <stdio.h>
-#include <stdint.h>
-
 /* Own headers */
 #include <memwrite.h>
 
-void memWrite(uint32_t addr, uint32_t data)
+
+mem_status write_memory(char arg1[], char arg2[])
 {
-#if 0
-    uint32_t i, userNum;
-    printf("Enter the number to be written :\n");
-    scanf("%d", &userNum);
-    printf("The user entered address is: %p\n",addr);
-    addr =  (uint32_t*)addr;
-    *addr = userNum;
-    printf("The value at the address %p is: %d\n",addr,userNum);
-    for(i=0;i<n;i++){      
- 	printf("p[%d] = %d\n",i,ptr[i]);
-    }
-#endif
+	uint64_t useraddr = atol(arg1);
+	uint32_t data = atoi(arg2);
+
+	uint32_t i = 0, flag = 0;
+
+	//printf("user addr = %lx	data = %d	nblock --> %d	bloackptr --> %p\n", useraddr, data, g_nblock, &g_blockptr[0]);
+
+	for (i = 0; i < g_nblock; i++)
+	{
+		uint64_t *temp = (uint64_t *)&g_blockptr[i];
+
+		if (temp == useraddr) {
+			g_blockptr[i] = data;
+			printf("Data successfully written at %p\n", &g_blockptr[i]);
+			flag = 1;
+			break;
+		}
+	}
+
+	if (flag != 1) {
+		printf("Invalid memory address\n");
+		return FAILED;
+	}
+
+	return SUCCESS;
 }

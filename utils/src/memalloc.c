@@ -30,27 +30,23 @@ SOFTWARE
  *
  */											   
 
-/* System headers */
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 /* Own headers */
 #include "memalloc.h"
 
-mem_status allocate_memory(void *arg)
+mem_status allocate_memory(char arg[], char  arg1[])
 {
-        int *a = (int *)arg;
-        //printf("a --> %d\n", *a);
+	g_nblock = atoi(arg);
 
-        g_memblock = (uint32_t *) malloc( (*a) * sizeof(uint32_t));
+	printf("n = %d\n", g_nblock);
 
-        if (g_memblock != NULL) {
-                printf("%ld bytes of Memory Allocated and the starting address is %p \n", ((*a) * sizeof(g_memblock)), (void *)g_memblock);
-                return MEMORY_INIT_SUCCESS;
+        g_blockptr = (uint32_t *) malloc( (g_nblock) * sizeof(uint32_t));
+
+        if (g_blockptr != NULL) {
+                printf("%ld bytes of Memory Allocated and the starting address of the block is %p \n", ((g_nblock) * sizeof(uint32_t)), (void *)g_blockptr);
+                return SUCCESS;
         }
         else {
                 printf("Memory allocation failed\n");
-                return MEMORY_INIT_FAILED;
+                return FAILED;
         }
 }
