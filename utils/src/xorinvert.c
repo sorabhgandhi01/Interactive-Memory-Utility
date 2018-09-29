@@ -31,16 +31,14 @@ SOFTWARE
  */											   
 
 /* System headers */
-#include <stdio.h>
 #include <time.h>
-#include <stdint.h>
 
 /* Own headers */
 #include <xorinvert.h>
 
+#if 0
 void xorInvert(uint32_t ptr, uint32_t data)
 {
-#if 0
     uint32_t i;
     clock_t t;
     t = clock();
@@ -52,5 +50,36 @@ void xorInvert(uint32_t ptr, uint32_t data)
     t = clock() - t;
     double time_taken = ((double)t/CLOCKS_PER_SEC);
     return time_taken;
+}
 #endif
+
+mem_status invert_memory(char arg[], char arg2[])
+{
+	uint64_t useraddr = atol(arg);
+        uint32_t i = 0, flag = 0;
+
+	clock_t t;
+	t = clock();
+
+        for (i = 0; i < g_nblock; i++)
+        {
+                uint64_t *temp = (uint64_t *)&g_blockptr[i];
+
+                if (temp == useraddr) {
+			//g_blockptr[i] = (g_blockptr[i]^0xFFFFFFFF);
+                        printf("Inverted Data at memory address %p is %x\n", temp, (g_blockptr[i]^0xFFFFFFFF));
+                        flag = 1;
+                        break;
+                }
+        }
+
+        if (flag != 1) {
+                printf("Invalid memory address\n");
+                return FAILED;
+        }
+
+	t = clock() - t;
+	printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+
+	return SUCCESS;
 }

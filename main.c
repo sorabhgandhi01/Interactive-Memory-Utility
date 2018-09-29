@@ -58,10 +58,11 @@ typedef struct command_list_t {
 
 int main ()
 {
-	struct command_list_t command_list[6] = {
+	struct command_list_t command_list[7] = {
 		{"write", &write_memory},
 		{"read", &read_memory},
                 {"allocate", &allocate_memory},
+		{"invert", &invert_memory},
                 {"free", &free_memory},
                 {"exit", &exit_util},
                 {NULL, NULL}

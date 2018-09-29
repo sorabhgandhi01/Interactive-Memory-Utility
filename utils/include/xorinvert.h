@@ -41,11 +41,11 @@ xorInvert
 --------------------------------------------------------------------------------------------------
 * This function will invert the data of specified memory block
 *
-* 	@\param	ptr	memory address specified by the user
+* 	@\param	arg	memory address specified by the user
 *
 * 	@\return	None
 *
 */
-void xorInvert (uint32_t ptr, uint32_t data);
+mem_status invert_memory(char arg[], char arg2[]);
 
 #endif
