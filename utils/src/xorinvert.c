@@ -36,27 +36,11 @@ SOFTWARE
 /* Own headers */
 #include <xorinvert.h>
 
-#if 0
-void xorInvert(uint32_t ptr, uint32_t data)
+mem_status invert_memory(char arg1[], char arg2[])
 {
-    uint32_t i;
-    clock_t t;
-    t = clock();
-    printf("Inverting the given inputs using XOR gates we get: \n");
-    for(i=0;i<n;i++){
-        printf("NOT of p[%d] is : %d\n",i,(ptr[i]^0xFFFFFFFF));
-	//printf("NOT of p[%d] is : %d\n",i,~(ptr[i]));
-    }
-    t = clock() - t;
-    double time_taken = ((double)t/CLOCKS_PER_SEC);
-    return time_taken;
-}
-#endif
-
-mem_status invert_memory(char arg[], char arg2[])
-{
-	uint64_t useraddr = atol(arg);
-        uint32_t i = 0, flag = 0;
+	uint64_t useraddr = atol(arg1);
+	uint64_t block = atoi(arg2);
+        uint32_t i = 0, flag = 0, j = 0;
 
 	clock_t t;
 	t = clock();
@@ -68,8 +52,24 @@ mem_status invert_memory(char arg[], char arg2[])
                 if (temp == useraddr) {
 			//g_blockptr[i] = (g_blockptr[i]^0xFFFFFFFF);
                         printf("Inverted Data at memory address %p is %x\n", temp, (g_blockptr[i]^0xFFFFFFFF));
-                        flag = 1;
-                        break;
+			
+			if ((block != 0) && (block <= (g_nblock - (i+1))))
+			{
+				for (j = (i+1); j < (block + i); j++)
+					printf("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
+				
+				flag = 1;
+                        	break;
+			}
+			else if(block == 0)
+			{
+				flag = 1;
+				break;
+			}
+			else {
+				printf("Invalid number of 32-bit words\n");
+				return FAILED;
+			}
                 }
         }
 
