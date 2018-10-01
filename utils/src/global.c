@@ -63,3 +63,12 @@ uint32_t chtoi(char str[])
         return ret_value;
 }
 
+uint32_t c_random(uint64_t *addr, uint32_t seed)
+{
+        uint32_t ret;
+        ret = (uintptr_t)(addr);
+
+        ret = ret ^ seed;
+
+        return ret;
+}

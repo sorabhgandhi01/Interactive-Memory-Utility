@@ -30,13 +30,11 @@ SOFTWARE
  *
  */											   
 
-/* System headers */
-#include <stdio.h>
 
 /* Own headers */
 #include "help.h"
 
-void help()
+mem_status help()
 {
 	printf("Usage: [Command] [argument] \n \
 			The following commands are supported \n	\
@@ -44,5 +42,9 @@ void help()
 				memfree \n	\
 				memdisplay \n	\
 				memwrite \n	\
-				invert \n");
+				invert \n       \
+				wpattern\n      \
+				vpattern\n");
+
+	return SUCCESS;
 }

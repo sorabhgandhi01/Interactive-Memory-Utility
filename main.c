@@ -43,6 +43,8 @@ SOFTWARE
 #include "memdisplay.h"
 #include "memwrite.h"
 #include "xorinvert.h"
+#include "writepattern.h"
+#include "verifypattern.h"
 #include "help.h"
 #include "exit.h"
 
@@ -58,12 +60,15 @@ typedef struct command_list_t {
 
 int main ()
 {
-	struct command_list_t command_list[7] = {
+	struct command_list_t command_list[10] = {
 		{"write", &write_memory},
 		{"read", &read_memory},
                 {"allocate", &allocate_memory},
 		{"invert", &invert_memory},
+		{"wpattern", &write_pattern},
+		{"vpattern", &verify_pattern},
                 {"free", &free_memory},
+		{"help", &help},
                 {"exit", &exit_util},
                 {NULL, NULL}
         };
@@ -74,7 +79,8 @@ int main ()
 
         memset(input, 0, sizeof(input));
 
-	printf("Welcome to the memory utility\n");
+	printf("Welcome to the memory utility\n	\
+			Type 'help' to get the list of supported commands\n");
 
         while(1)
         {

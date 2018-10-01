@@ -21,4 +21,6 @@ uint64_t chtol(char str[]);
 
 uint32_t chtoi(char str[]);
 
+uint32_t c_random(uint64_t *addr, uint32_t seed);
+
 #endif

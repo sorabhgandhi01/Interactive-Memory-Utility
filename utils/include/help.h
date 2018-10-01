@@ -46,6 +46,6 @@ help
 * 	@\return	None
 *
 */
-void help();
+mem_status help();
 
 #endif
