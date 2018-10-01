@@ -33,11 +33,17 @@ SOFTWARE
 /* Own headers */
 #include "memalloc.h"
 
-mem_status allocate_memory(char arg[], char  arg1[])
+mem_status allocate_memory(char arg[])
 {
+	uint32_t digit = strlen(arg);
+	if (digit > 6) {
+		printf("Invalid number of 32bit words\n");
+		return FAILED;
+	}
+
 	g_nblock = atoi(arg);
 
-	printf("n = %d\n", g_nblock);
+	//printf("n = %d\n", g_nblock);
 
         g_blockptr = (uint32_t *) malloc( (g_nblock) * sizeof(uint32_t));
 

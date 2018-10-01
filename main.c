@@ -51,7 +51,7 @@ typedef struct command_list_t {
 
         const char *cmd_name;
 
-        mem_status (*function_name)(char arg1[], char arg2[]);
+        mem_status (*function_name)(char arg[]);
 
 } command_list_t;
 
@@ -68,10 +68,10 @@ int main ()
                 {NULL, NULL}
         };
                 
-        char input[32];
+        char input[50];
 	char cmd[10];
-	char c_arg1[17];
-	char c_arg2[5];
+	char arg[40];
+
         memset(input, 0, sizeof(input));
 
 	printf("Welcome to the memory utility\n");
@@ -81,23 +81,17 @@ int main ()
                 printf("Enter a fuction to call\n");
                 scanf(" %[^\n]%*c", input);
 
-                //uint64_t arg1 = 0;
-		//uint32_t arg2 = 0;
 	       	uint32_t i = 0;
 
                 memset(cmd, 0, sizeof(cmd));
-                memset(c_arg1, 0, sizeof(c_arg1));
-		memset(c_arg2, 0, sizeof(c_arg2));
+                memset(arg, 0, sizeof(arg));
 
-                sscanf(input, "%s %s %s", cmd, c_arg1, c_arg2);
-
-                //arg1 = atoi(c_arg1);
-		//arg2 = atoi(c_arg2);
+                sscanf(input, "%s %[^\n]%*c", cmd, arg);
 
                 for (i = 0; command_list[i].function_name; i++)
                 {
                         if (strcmp(cmd, command_list[i].cmd_name) == 0)
-                                (*(command_list[i].function_name))(c_arg1, c_arg2);
+                                (*(command_list[i].function_name))(arg);
                 }
         }
 

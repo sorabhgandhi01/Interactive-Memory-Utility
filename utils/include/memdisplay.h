@@ -47,6 +47,6 @@ displaymem
 * 	@\return	None
 *
 */
-mem_status read_memory(char arg1[], char arg2[]);
+mem_status read_memory(char arg[]);
 
 #endif                                                                                            

@@ -33,23 +33,44 @@ SOFTWARE
 /* Own headers */
 #include <memdisplay.h>
 
-mem_status read_memory(char arg1[], char arg2[])
+mem_status read_memory(char arg[])
 {
-	uint64_t useraddr = atol(arg1);
-       // uint32_t r_bytes = atoi(arg2);
+	char addr[15];
+	char r_bytes[5];
 
-        uint32_t i = 0, flag = 0;
+	memset(addr, 0, sizeof(addr));
+	memset(r_bytes, 0, sizeof(r_bytes));
+
+	sscanf(arg, "%s %s", addr, r_bytes);
+
+	uint64_t useraddr = chtol(addr);
+        uint32_t block = chtoi(r_bytes);
+        uint32_t i = 0, flag = 0, j = 0;
 
         //printf("user addr = %lx data = %d       nblock --> %d   bloackptr --> %p\n", useraddr, r_bytes, g_nblock, &g_blockptr[0]);
 
         for (i = 0; i < g_nblock; i++)
         {
-                uint64_t *temp = (uint64_t *)&g_blockptr[i];
-                
-                if (temp == useraddr) {
-                        printf("Data at memory address %p is %d\n", temp, g_blockptr[i]);
-                        flag = 1;
-                        break;
+                if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) {
+                        printf("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
+                        
+			if ((block != 0) && (block <= (g_nblock - (i+1))))
+                        {
+                                for (j = (i+1); j < (block + i); j++)
+                                        printf("Data at memory address %p is %x\n", &g_blockptr[j], g_blockptr[j]);
+
+                                flag = 1;
+                                break;
+                        }
+                        else if(block == 0)
+                        {
+                                flag = 1;
+                                break;
+                        }
+                        else {
+                                printf("Invalid number of 32-bit words\n");
+                                return FAILED;
+                        }
                 }
         }
 

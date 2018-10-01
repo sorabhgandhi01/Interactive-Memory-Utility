@@ -42,11 +42,10 @@ memWrite
 * This function will write data into the specified memory block
 *
 * 	@\param	addr	Memory address specified by the user
-* 	@\param data	Data specified by the user to write in the memory block
 *
 * 	@\return	None
 *
 */
-mem_status write_memory(char useraddr[], char data[]);
+mem_status write_memory(char arg[]);
 
 #endif

@@ -34,22 +34,28 @@ SOFTWARE
 #include <memwrite.h>
 
 
-mem_status write_memory(char arg1[], char arg2[])
+mem_status write_memory(char arg[])
 {
-	uint64_t useraddr = atol(arg1);
-	uint32_t data = atoi(arg2);
+	char addr[17];
+	char hex_data[9];
 
+	memset(addr, 0, sizeof(addr));
+	memset(hex_data, 0, sizeof(hex_data));
+
+	sscanf(arg, "%s %s", addr, hex_data);
+
+
+	uint64_t useraddr = chtol(addr);
+	uint32_t data = chtoi(hex_data);
 	uint32_t i = 0, flag = 0;
 
-	//printf("user addr = %lx	data = %d	nblock --> %d	bloackptr --> %p\n", useraddr, data, g_nblock, &g_blockptr[0]);
+	//printf("user addr = %lx	data = %x	nblock --> %d	bloackptr --> %p\n", useraddr, data, g_nblock, &g_blockptr[0]);
 
 	for (i = 0; i < g_nblock; i++)
 	{
-		uint64_t *temp = (uint64_t *)&g_blockptr[i];
-
-		if (temp == useraddr) {
+		if ((uint64_t *) &g_blockptr[i] == (uint64_t *)useraddr) {
 			g_blockptr[i] = data;
-			printf("Data successfully written at %p\n", &g_blockptr[i]);
+			printf("Data written at %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 			flag = 1;
 			break;
 		}

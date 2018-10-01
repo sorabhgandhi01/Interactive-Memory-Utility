@@ -36,22 +36,25 @@ SOFTWARE
 /* Own headers */
 #include <xorinvert.h>
 
-mem_status invert_memory(char arg1[], char arg2[])
+mem_status invert_memory(char arg[])
 {
-	uint64_t useraddr = atol(arg1);
-	uint64_t block = atoi(arg2);
-        uint32_t i = 0, flag = 0, j = 0;
-
 	clock_t t;
 	t = clock();
 
+	char addr[15];
+	char r_bytes[5];
+
+	sscanf(arg, "%s %s", addr, r_bytes);
+
+	uint64_t useraddr = chtol(addr);
+	uint32_t block = chtoi(r_bytes);
+        uint32_t i = 0, flag = 0, j = 0;
+
         for (i = 0; i < g_nblock; i++)
         {
-                uint64_t *temp = (uint64_t *)&g_blockptr[i];
-
-                if (temp == useraddr) {
+                if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) {
 			//g_blockptr[i] = (g_blockptr[i]^0xFFFFFFFF);
-                        printf("Inverted Data at memory address %p is %x\n", temp, (g_blockptr[i]^0xFFFFFFFF));
+                        printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
 			
 			if ((block != 0) && (block <= (g_nblock - (i+1))))
 			{

@@ -46,6 +46,6 @@ help
 * 	@\return	None
 *
 */
-void help(void);
+void help();
 
 #endif

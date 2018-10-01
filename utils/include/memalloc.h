@@ -48,7 +48,7 @@ allocate_memory
 * 			On failure the function MEMORY_INIT_FAILED
 *
 */
-mem_status allocate_memory(char arg[], char arg1[]);
+mem_status allocate_memory(char arg[]);
 
 
 #endif

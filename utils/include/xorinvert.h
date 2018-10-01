@@ -46,6 +46,6 @@ xorInvert
 * 	@\return	None
 *
 */
-mem_status invert_memory(char arg[], char arg2[]);
+mem_status invert_memory(char arg[]);
 
 #endif
