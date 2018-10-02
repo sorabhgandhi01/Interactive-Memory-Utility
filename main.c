@@ -50,10 +50,9 @@ SOFTWARE
 
 
 typedef struct command_list_t {
+	const char *cmd_name;
 
-        const char *cmd_name;
-
-        mem_status (*function_name)(char arg[]);
+	mem_status (*function_name)(char arg[]);
 
 } command_list_t;
 
@@ -63,43 +62,43 @@ int main ()
 	struct command_list_t command_list[10] = {
 		{"write", &write_memory},
 		{"read", &read_memory},
-                {"allocate", &allocate_memory},
+        {"allocate", &allocate_memory},
 		{"invert", &invert_memory},
 		{"wpattern", &write_pattern},
 		{"vpattern", &verify_pattern},
-                {"free", &free_memory},
+        {"free", &free_memory},
 		{"help", &help},
-                {"exit", &exit_util},
-                {NULL, NULL}
-        };
+        {"exit", &exit_util},
+        {NULL, NULL}
+	};
                 
-        char input[50];
+    char input[50];
 	char cmd[10];
 	char arg[40];
 
-        memset(input, 0, sizeof(input));
+    memset(input, 0, sizeof(input));
 
 	printf("Welcome to the memory utility\n	\
 			Type 'help' to get the list of supported commands\n");
 
-        while(1)
-        {
-                printf("Enter a fuction to call\n");
-                scanf(" %[^\n]%*c", input);
+	while(1)
+	{
+		printf("Enter a fuction to call\n");
+        scanf(" %[^\n]%*c", input);
 
-	       	uint32_t i = 0;
+      	uint32_t i = 0;
 
-                memset(cmd, 0, sizeof(cmd));
-                memset(arg, 0, sizeof(arg));
+        memset(cmd, 0, sizeof(cmd));
+        memset(arg, 0, sizeof(arg));
 
-                sscanf(input, "%s %[^\n]%*c", cmd, arg);
+        sscanf(input, "%s %[^\n]%*c", cmd, arg);
 
-                for (i = 0; command_list[i].function_name; i++)
-                {
-                        if (strcmp(cmd, command_list[i].cmd_name) == 0)
-                                (*(command_list[i].function_name))(arg);
-                }
-        }
-
-        exit(EXIT_SUCCESS);
+        for (i = 0; command_list[i].function_name; i++)
+         {
+			 if (strcmp(cmd, command_list[i].cmd_name) == 0)
+				 (*(command_list[i].function_name))(arg);
+		 }
+	}
+	
+	exit(EXIT_SUCCESS);
 }
