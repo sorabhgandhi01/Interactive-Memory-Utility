@@ -78,12 +78,11 @@ int main ()
 
     memset(input, 0, sizeof(input));
 
-	printf("Welcome to the memory utility\n	\
-			Type 'help' to get the list of supported commands\n");
+	printf("Welcome to the memory utility\n\tType 'help' to get the list of supported commands\n\n");
 
-	while(1)
-	{
-		printf("Enter a fuction to call\n");
+	while(1) {
+
+		printf("\n>>");
         scanf(" %[^\n]%*c", input);
 
       	uint32_t i = 0;
@@ -93,11 +92,12 @@ int main ()
 
         sscanf(input, "%s %[^\n]%*c", cmd, arg);
 
-        for (i = 0; command_list[i].function_name; i++)
-         {
-			 if (strcmp(cmd, command_list[i].cmd_name) == 0)
-				 (*(command_list[i].function_name))(arg);
-		 }
+        for (i = 0; command_list[i].function_name; i++) {
+
+		 if (strcmp(cmd, command_list[i].cmd_name) == 0)
+			 (*(command_list[i].function_name))(arg);
+	 }
+
 	}
 	
 	exit(EXIT_SUCCESS);

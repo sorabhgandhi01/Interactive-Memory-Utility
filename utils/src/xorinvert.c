@@ -24,49 +24,84 @@ mem_status invert_memory(char arg[])
 	clock_t t;
 	t = clock();
 
+	char flag[3];
 	char addr[15];
 	char r_bytes[5];
 
-	sscanf(arg, "%s %s", addr, r_bytes); // Splits user input to into address, block size
+	memset(addr, 0, sizeof(addr));
+    memset(r_bytes, 0, sizeof(r_bytes));
+    memset(flag, 0, sizeof(flag));
 
-	uint64_t useraddr = chtol(addr); // Converts string to long
-	uint32_t block = chtoi(r_bytes); // Converts string to integer
-	uint32_t i = 0, flag = 0, j = 0;
+	sscanf(arg, "%s %s %s", flag, addr, r_bytes); // Splits user input to into address, block size
+
+	if ((flag[0] == '-') && (flag[1] == 'a')) {
+
+		uint64_t useraddr = chtol(addr); // Converts string to long
+		uint32_t block = chtoi(r_bytes); // Converts string to integer
+		uint32_t i = 0, flag = 0, j = 0;
 	
-	/* Loop to invert the contents of the user specified memory blocks */
-	for (i = 0; i < g_nblock; i++)
-	{
-		if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) 
+		/* Loop to invert the contents of the user specified memory blocks */
+		for (i = 0; i < g_nblock; i++)
 		{
-			printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
-			if ((block != 0) && (block <= (g_nblock - (i+1))))
+			if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) 
 			{
-				for (j = (i+1); j < (block + i + 1); j++)
-					printf("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
+				printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
+				if ((block != 0) && (block <= (g_nblock - (i+1))))
+				{
+					for (j = (i+1); j < (block + i + 1); j++)
+						printf("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
 				
-				flag = 1;
-				break;
-			}
-			else if(block == 0)
-			{
-				flag = 1;
-				break;
-			}
-			else 
-			{
-				printf("Invalid number of 32-bit words\n");
-				return FAILED;
+					flag = 1;
+					break;
+				}
+				else if(block == 0)
+				{
+					flag = 1;
+					break;
+				}
+				else 
+				{
+					printf("Invalid number of 32-bit words\n");
+					return FAILED;
+				}
 			}
 		}
-	}
 	
-	if (flag != 1) {
-		printf("Invalid memory address\n");
-		return FAILED; 
+		if (flag != 1) {
+			printf("Invalid memory address\n");
+			return FAILED; 
+		}
+
+		t = clock() - t;
+		printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+
+		return SUCCESS;
 	}
+	else if ((flag[0] == '-') && (flag[1] == 'b')) {
 
-	t = clock() - t;
-	printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+		uint32_t offset = chtoi(addr);
+        uint32_t block = chtoi(r_bytes);
+        uint32_t i = 0;
 
-	return SUCCESS;
+        if (offset >= g_nblock) {
+            printf("Invalid offset\n");
+            return FAILED;
+        }
+
+        if (block >= (g_nblock - offset)) {
+            printf("Invalid number of next 32 bit words\n");
+            return FAILED;
+        }
+
+        for (i = offset; i <= (offset + block); i++)
+        {
+			printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
+        }
+
+        return SUCCESS;
+    }
+    else {
+        printf("Invalid flag\n");
+        return FAILED;
+	}
 }

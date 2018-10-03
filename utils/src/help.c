@@ -17,16 +17,15 @@
 
 mem_status help()
 {
-	printf("Usage: [Command] [argument] \n \
-			The following commands are supported \n	\
-				allocate <block size> \n 	\
-				free \n	\
-				read <address> <block size> \n	\
-				write <address> <data in hexadecimal> \n	\
-				invert <address> <block size> \n 	\
-				wpattern <address> <block size> <seed> \n 	\
-				vpattern <address> <block size> <seed> \n 	\
-				exit \n ");
+	printf("Usage: [Command] [argument] \n\n The following commands are supported \n	\
+    allocate <N block>\n 	\
+	free \n	\
+	read <flag> <arg> <next N blocks>\n	\
+	write <flag> <arg> <data> \n	\
+	invert <flag> <arg> <next N blocks> \n 	\
+	wpattern <flag> <arg> <next N blocks> <seed> \n 	\
+	vpattern <flag> <arg> <next N blocks> <seed> \n 	\
+	exit \n ");
 	
 	return SUCCESS;
 }
