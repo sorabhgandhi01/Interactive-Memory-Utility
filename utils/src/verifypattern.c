@@ -6,6 +6,8 @@
  *
  */
 
+#include <time.h>
+
 #include "verifypattern.h"
 
 /**
@@ -17,6 +19,9 @@
 
 mem_status verify_pattern(char arg[])
 {
+	clock_t t;
+	t = clock();
+
 	char flag[3];
 	char addr[17];
 	char r_bytes[9];
@@ -78,6 +83,10 @@ mem_status verify_pattern(char arg[])
 			printf("Invalid Memory address\n");
 			return FAILED;
 		}
+		
+		t = clock() - t;
+        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+
 		return SUCCESS;
 	}
 	else if ((flag[0] == '-') && (flag[1] == 'b')) {
@@ -105,6 +114,9 @@ mem_status verify_pattern(char arg[])
  			else
  				printf("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
         }
+		
+		t = clock() - t;
+        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));		
 
         return SUCCESS;
 

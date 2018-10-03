@@ -5,7 +5,7 @@
  * @\date	09/25/2018
  *
  */
-
+#include <time.h>
 #include "writepattern.h"
 
 /**
@@ -17,6 +17,9 @@
 
 mem_status write_pattern(char arg[])
 {
+	clock_t t;
+	t = clock();
+
 	char flag[3];
 	char addr[17];
 	char r_bytes[9];
@@ -75,6 +78,9 @@ mem_status write_pattern(char arg[])
 			return FAILED;
 		}
 
+		t = clock() - t;
+        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+
 		return SUCCESS;
 	}
 	else if ((flag[0] == '-') && (flag[1] == 'b')) {
@@ -99,6 +105,9 @@ mem_status write_pattern(char arg[])
 			g_blockptr[i] = c_random((uint64_t *)&g_blockptr[i], seed);
 			printf("Random Pattern Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
         }
+
+		t = clock() - t;
+        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
 
         return SUCCESS;
     }

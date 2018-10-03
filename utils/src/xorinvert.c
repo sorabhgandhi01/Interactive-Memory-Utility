@@ -97,8 +97,11 @@ mem_status invert_memory(char arg[])
         {
 			printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
         }
-
-        return SUCCESS;
+		
+		t = clock() - t;
+        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+		
+		return SUCCESS;
     }
     else {
         printf("Invalid flag\n");
