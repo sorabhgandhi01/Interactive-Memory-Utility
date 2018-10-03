@@ -44,7 +44,7 @@ mem_status verify_pattern(char arg[])
 				printf("Expected value is %x	Actual value is %x	Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
 			if ((block != 0) && (block <= (g_nblock - (i+1))))
 			{
-				for (j = (i+1); j < (block + i); j++){
+				for (j = (i+1); j < (block + i + 1); j++){
 					if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {
 						printf("Pattern Matched\n");
 					}

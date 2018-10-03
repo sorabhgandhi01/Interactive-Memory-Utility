@@ -41,7 +41,7 @@ mem_status invert_memory(char arg[])
 			printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
 			if ((block != 0) && (block <= (g_nblock - (i+1))))
 			{
-				for (j = (i+1); j < (block + i); j++)
+				for (j = (i+1); j < (block + i + 1); j++)
 					printf("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
 				
 				flag = 1;

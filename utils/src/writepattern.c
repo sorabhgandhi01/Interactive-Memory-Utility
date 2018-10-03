@@ -42,7 +42,7 @@ mem_status write_pattern(char arg[])
 			
 			if ((block != 0) && (block <= (g_nblock - (i+1))))
 			{
-				for (j = (i+1); j < (block + i); j++)
+				for (j = (i+1); j < (block + i + 1); j++)
 				{
 					g_blockptr[j] = c_random((uint64_t *)&g_blockptr[j], seed);
 					

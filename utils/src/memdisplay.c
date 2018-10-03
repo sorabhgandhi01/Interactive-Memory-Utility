@@ -24,7 +24,7 @@ mem_status read_memory(char arg[])
 	memset(addr, 0, sizeof(addr));
 	memset(r_bytes, 0, sizeof(r_bytes));
 
-	sscanf(arg, "%s %s", addr, r_bytes); //Splits user input to address and block size
+	sscanf(arg, "%s %s" addr, r_bytes); //Splits user input to address and block size
 
 	uint64_t useraddr = chtol(addr); // Converts string to long
 	uint32_t block = chtoi(r_bytes); // Converts string to integer
@@ -37,7 +37,7 @@ mem_status read_memory(char arg[])
 			printf("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 			if ((block != 0) && (block <= (g_nblock - (i+1))))
 			{
-				for (j = (i+1); j < (block + i); j++)
+				for (j = (i+1); j < (block + i + 1); j++)
 					printf("Data at memory address %p is %x\n", &g_blockptr[j], g_blockptr[j]);
 				flag = 1;
 				break;
@@ -54,9 +54,27 @@ mem_status read_memory(char arg[])
 		}
 	}
 	
+#if 0
 	if (flag != 1) {
 		printf("Invalid memory address\n");
 		return FAILED;
 	}
 	return SUCCESS;
+	}
+	else {
+		uint32_t offset = chtoi(addr);
+		uint32_t block = chtoi(r_bytes);
+		uint32_t i = 0;
+
+		if (offset > g_nblock) {
+			printf("Invalid offset\n");
+			return FAILED;
+		}
+
+		if (block <= (g_nblock - offset)) {
+			printf("Invalid number of next 32 bit words\n");
+			return FAILED;
+		}
+	}	
+#endif
 }
