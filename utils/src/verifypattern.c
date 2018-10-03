@@ -51,7 +51,7 @@ mem_status verify_pattern(char arg[])
 				if ((block != 0) && (block <= (g_nblock - (i+1))))
 				{
 					for (j = (i+1); j < (block + i + 1); j++) {
-						if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {
+						if (g_blockptr[j] == c_random((uint64_t *)&g_blockptr[j], seed)) {
 							printf("Pattern Matched\n");
 						}
 						else
