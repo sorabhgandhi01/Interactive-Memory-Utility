@@ -5,6 +5,7 @@ CC = gcc
 CFLAGS = -Wall \
 	 -Werror \
 	 -g \
+	 -O0 \
 	 -Iutils/include/
 
 INC_PATH = utils/include
