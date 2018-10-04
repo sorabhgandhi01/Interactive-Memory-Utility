@@ -30,7 +30,8 @@ mem_status help()
 	invert <flag> <arg> <next N blocks> \n	\
 	wpattern <flag> <arg> <next N blocks> <seed> \n	\
 	vpattern <flag> <arg> <next N blocks> <seed> \n	\
-	exit \n ");
+	exit \n\n	\
+Use Flag --> '-a' to specify address and '--b' to specify offset\n");
 	
 	return SUCCESS;
 }
