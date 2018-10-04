@@ -1,0 +1,18 @@
+help
+allocate 15
+write -b 0 FF
+write -b 1 FF1
+write -b 2 EA
+write -b 3 F12
+write -b 4 F2
+write -b 5 FA
+write -b 6 821
+write -b 7 1232
+write -b 8 BE32
+write -b 9 BA32
+write -b A 9754
+read -b 0 E
+wpattern -b 3 A 102
+vpattern -b 3 B 102
+free
+exit

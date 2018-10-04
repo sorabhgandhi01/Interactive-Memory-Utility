@@ -32,7 +32,6 @@ mem_status help()
 	vpattern <flag> <arg> <next N blocks> <seed> \n	\
 	exit \n\n	\
 Use Flag --> '-a' to specify address and '-b' to specify offset\n    \
-    Use arg --> Offset value if '-b' is flag and Address if '-a' is flag\n\n\
-	Note: read, write, invert, wpattern and vpattern take hexadecimal inputs\n"); 	
+    Use arg --> Offset value if '-b' is flag and Address if '-a' is flag\n"); 	
 	return SUCCESS;
 }
