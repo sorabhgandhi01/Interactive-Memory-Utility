@@ -11,14 +11,20 @@
 #include "verifypattern.h"
 
 /**
- * @\brief verify_pattern()
- * This function takes a character array as argument and verifies if the pseudo random generated value at the user specified memory location is correct  
- * @\param arg[] Stores the address, number of blocks and seed value
- * @\return SUCCESS or FAILED
-**/	
-
+--------------------------------------------------------------------------------------------------
+verifyPattern
+--------------------------------------------------------------------------------------------------
+*   This function verifies if the pseudo random generated value at the user specified memory location is correct
+*
+*   @\param arg     contains flag, Memory address/offset specified by the user and number of 
+*                   next 'N' blocks and the seed value
+*
+*   @\return        On success it returns SUCCESS,
+*                   On failure it returns FAILED
+*/
 mem_status verify_pattern(char arg[])
 {
+	/*initialize the clock*/
 	clock_t t;
 	t = clock();
 
@@ -27,13 +33,15 @@ mem_status verify_pattern(char arg[])
 	char r_bytes[9];
 	char r_seed[9];
 	
+	/*clear all the buffer*/
 	memset(flag, 0, sizeof(flag));
 	memset(addr, 0, sizeof(addr));
 	memset(r_bytes, 0, sizeof(r_bytes));
 	memset(r_seed, 0, sizeof(r_seed));
 	
-	sscanf(arg, "%s %s %s %s", flag, addr, r_bytes, r_seed); // Splits the user input into address, block size and seed value
+	sscanf(arg, "%s %s %s %s", flag, addr, r_bytes, r_seed); 	// Splits the user input into address, block size and seed value
 	
+	/*check for the address flag = '-a' */
 	if ((flag[0] == '-') && (flag[1] == 'a')) {
 
 		uint64_t useraddr = chtol(addr); // Converts string to long
@@ -47,26 +55,33 @@ mem_status verify_pattern(char arg[])
 		/* Loop to verify if pseudo random pattern wriiten into memory location is valid */
 		for (i = 0; i < g_nblock; i++)
 		{
+			/*Check if the user specified address matches with the allocated 32bit word address*/
 			if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) {
+
+				/*Check if 32bit address contains the same random number generated for a particular seed */
 				if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {
 					printf("Pattern Matched\n");
-				}
-				else
+				} else {
 					printf("Expected value is %x	Actual value is %x	Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
+				}
+
+				/*Check if the user has specified a valid number of next "N" blocks*/
 				if ((block != 0) && (block <= (g_nblock - (i+1))))
 				{
 					for (j = (i+1); j < (block + i + 1); j++) {
+
+						/*Check if 32bit address contains the same random number generated for a particular seed */
 						if (g_blockptr[j] == c_random((uint64_t *)&g_blockptr[j], seed)) {
 							printf("Pattern Matched\n");
-						}
-						else
+						} else {
 							printf("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
-				
+						}
 					}
 				
 					flag = 1;
 					break;
 				}
+				/*For '0' next block*/
 				else if(block == 0)
 				{
 					flag = 1;
@@ -79,28 +94,33 @@ mem_status verify_pattern(char arg[])
 			}
 		}
 
+		/*Invalid addres if the user address does not match with any of the 32bit word*/
 		if (flag != 1) {
 			printf("Invalid Memory address\n");
 			return FAILED;
 		}
 		
+		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+        printf("Time taken to perform this operation is %f seconds\n", ((double)t/CLOCKS_PER_SEC));
 
 		return SUCCESS;
 	}
+	/*Check for the address flag '-b' */
 	else if ((flag[0] == '-') && (flag[1] == 'b')) {
         
-		uint32_t offset = chtoi(addr);
-        uint32_t block = chtoi(r_bytes);
-		uint32_t seed = chtoi(r_seed);
+		uint32_t offset = chtoi(addr);		//Convert string to long
+        uint32_t block = chtoi(r_bytes);	//Convert string to int
+		uint32_t seed = chtoi(r_seed);		//COnvert string to int
         uint32_t i = 0;
 
+		/*Check for an out of range offset*/
         if (offset >= g_nblock) {
             printf("Invalid offset\n");
             return FAILED;
         }
 
+		/*Check for an out of range 'N blocks' */
         if (block >= (g_nblock - offset)) {
             printf("Invalid number of next 32 bit words\n");
             return FAILED;
@@ -108,13 +128,15 @@ mem_status verify_pattern(char arg[])
 
         for (i = offset; i <= (offset + block); i++)
         {
+			/*Check if 32bit address contains the same random number generated for a particular seed */
 			if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {                                                                                                   
  				printf("Pattern Matched\n");
- 			}
- 			else
+ 			} else {
  				printf("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
+			}
         }
 		
+		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
         printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));		
 

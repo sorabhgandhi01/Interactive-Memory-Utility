@@ -48,7 +48,7 @@ SOFTWARE
 #include "help.h"
 #include "exit.h"
 
-
+/*Structure defined to store command name and the function invoking that command*/
 typedef struct command_list_t {
 	const char *cmd_name;
 
@@ -59,6 +59,8 @@ typedef struct command_list_t {
 
 int main ()
 {
+
+	/*populate the structure with all the supporting commands and respective function*/
 	struct command_list_t command_list[10] = {
 		{"write", &write_memory},
 		{"read", &read_memory},
@@ -72,30 +74,34 @@ int main ()
         {NULL, NULL}
 	};
                 
-    char input[50];
-	char cmd[10];
-	char arg[40];
+    char input[50];			//Declare the input buffer to get the user input
+	char cmd[10];			//Declare the cmd buffer to store the input command name
+	char arg[40];			//Declare the arg buffer to store the command arguments given by the user
 
-    memset(input, 0, sizeof(input));
+    memset(input, 0, sizeof(input));			//Clear the input buffer
 
 	printf("Welcome to the memory utility\n\tType 'help' to get the list of supported commands\n\n");
 
+	/*Run the loop till user enters exit command or ctrl-c*/
 	while(1) {
 
 		printf("\n>>");
-        scanf(" %[^\n]%*c", input);
+        scanf(" %[^\n]%*c", input);			//get the user input
 
       	uint32_t i = 0;
 
+		/*Clear the cmd buffer and arg buffer*/
         memset(cmd, 0, sizeof(cmd));
         memset(arg, 0, sizeof(arg));
 
-        sscanf(input, "%s %[^\n]%*c", cmd, arg);
+        sscanf(input, "%s %[^\n]%*c", cmd, arg);			//Parse the user command and argument
 
+		/*search the input command in list of commands populated in the structure*/
         for (i = 0; command_list[i].function_name; i++) {
 
+		/*Check if the particular input command matches with a command name in the structure*/
 		 if (strcmp(cmd, command_list[i].cmd_name) == 0)
-			 (*(command_list[i].function_name))(arg);
+			 (*(command_list[i].function_name))(arg);			//Invoke appropriate function for the input command
 	 }
 
 	}

@@ -16,9 +16,9 @@ SRC := memalloc.c memfree.c memdisplay.c memwrite.c xorinvert.c main.c help.c ex
 
 OBJ := $(SRC:.c=.o)
 
-main: $(OBJ)
-	$(CC) -o main $(OBJ) $(CFLAGS)
+memory_util: $(OBJ)
+	$(CC) -o memory_util $(OBJ) $(CFLAGS)
 
 clean:
-	rm -f *.o main
+	rm -f *.o memory_util
 

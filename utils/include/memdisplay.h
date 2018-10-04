@@ -9,19 +9,20 @@
 #ifndef _MEMDISPLAY_H
 #define _MEMDISPLAY_H
 
+/*own header*/
 #include "global.h"
 
 /**
 --------------------------------------------------------------------------------------------------
-displaymem
+read_memory
 --------------------------------------------------------------------------------------------------
-* This function will display the data stored in the memory block
+*	This function will display the data stored in the memory block
 *
-* 	@\param userAddr	Memory address specified by the user
-* 	@\param n_block		Number of memory blocks to read
+* 	@\param arg			contains flag, Memory address/offset specified by the user and number of 
+*						next 'N' blocks
 *
-* 	@\return	None
-*
+* 	@\return			On success it returns SUCCESS,
+*                       On failure it returns FAILED
 */
 mem_status read_memory(char arg[]);
 

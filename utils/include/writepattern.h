@@ -12,11 +12,12 @@
 --------------------------------------------------------------------------------------------------
 writePattern
 --------------------------------------------------------------------------------------------------
-* This function writes a pseudo random generated value at the user specified memory location
+*	This function writes a pseudo random generated value at the user specified memory location
 *
-* 	@\param arg	Stores the address, number of blocks and seed value
+* 	@\param arg		contains flag, Memory address/offset specified by the user and number of 
+*                   next 'N' blocks and the seed value
 *
-* 	@\return	SUCCESS or FAILED
-*
+* 	@\return		On success it returns SUCCESS,
+*                   On failure it returns FAILED
 */
 mem_status write_pattern (char arg[]);

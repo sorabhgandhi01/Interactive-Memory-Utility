@@ -9,14 +9,20 @@
 #include "writepattern.h"
 
 /**
- * @\brief write_pattern()
- * This function takes a character array as argument and writes a pseudo random generated value at the user specified memory location  
- * @\param arg[] Stores the address, number of blocks and seed value
- * @\return SUCCESS or FAILED
-**/	
-
+--------------------------------------------------------------------------------------------------
+writePattern
+--------------------------------------------------------------------------------------------------
+*   This function writes a pseudo random generated value at the user specified memory location
+*
+*   @\param arg     contains flag, Memory address/offset specified by the user and number of 
+*                   next 'N' blocks and the seed value
+*
+*   @\return        On success it returns SUCCESS,
+*                   On failure it returns FAILED
+*/
 mem_status write_pattern(char arg[])
 {
+	/*initialize the clock*/
 	clock_t t;
 	t = clock();
 
@@ -25,6 +31,7 @@ mem_status write_pattern(char arg[])
 	char r_bytes[9];
 	char r_seed[9];
 
+	/*clear all the buffer*/
 	memset(flag, 0, sizeof(flag));
 	memset(addr, 0, sizeof(addr));
 	memset(r_bytes, 0, sizeof(r_bytes));
@@ -38,22 +45,26 @@ mem_status write_pattern(char arg[])
 		uint32_t block = chtoi(r_bytes); // Converts string to integer
 		uint32_t seed = chtoi(r_seed); // Convert string to integer
 
-		uint32_t i = 0, flag = 0, j = 0;
+		uint32_t i = 0,
+				flag = 0,
+				j = 0;
 	
 		/* Loop to write pseudo random numbers into the user specified memory blocks */
 		for (i = 0; i < g_nblock; i++)
 		{
+			/*Check if the user specified address matches with the allocated 32bit word address*/
 			if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) {
 
-				g_blockptr[i] = c_random((uint64_t *)&g_blockptr[i], seed);
+				g_blockptr[i] = c_random((uint64_t *)&g_blockptr[i], seed); //Write the random number to user specified memory address
 				
 				printf("Random Pattern Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 			
+				/*Check if the user has specified a valid number of next "N" blocks*/
 				if ((block != 0) && (block <= (g_nblock - (i+1)))) 
 				{
 					for (j = (i+1); j < (block + i + 1); j++) {
 
-						g_blockptr[j] = c_random((uint64_t *)&g_blockptr[j], seed);
+						g_blockptr[j] = c_random((uint64_t *)&g_blockptr[j], seed);	//Write the random number to user specified memory address
 					
 						printf("Random Pattern Data at memory address %p is %x\n", &g_blockptr[j], g_blockptr[j]);
 					}
@@ -73,16 +84,19 @@ mem_status write_pattern(char arg[])
 			}
 		}
 	
+		 /*Invalid addres if the user address does not match with any of the 32bit word*/
 		if (flag != 1) {
 			printf("Invalid memory address\n");
 			return FAILED;
 		}
 
+		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
         printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
 
 		return SUCCESS;
 	}
+	/*Check for the address flag '-b' */
 	else if ((flag[0] == '-') && (flag[1] == 'b')) {
         
 		uint32_t offset = chtoi(addr);
@@ -90,11 +104,13 @@ mem_status write_pattern(char arg[])
 		uint32_t seed = chtoi(r_seed);
         uint32_t i = 0;
 
+		/*Check for an out of range offset*/
         if (offset >= g_nblock) {
             printf("Invalid offset\n");
             return FAILED;
         }
 
+		/*Check for an out of range 'N blocks' */
         if (block >= (g_nblock - offset)) {
             printf("Invalid number of next 32 bit words\n");
             return FAILED;
@@ -106,6 +122,7 @@ mem_status write_pattern(char arg[])
 			printf("Random Pattern Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
         }
 
+		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
         printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
 

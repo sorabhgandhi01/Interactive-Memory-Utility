@@ -16,12 +16,12 @@
 --------------------------------------------------------------------------------------------
 allocate_memory
 --------------------------------------------------------------------------------------------
-* This function will allocate specified number of memory blocks in heap segment
+*	This function will allocate specified number of memory blocks in heap segment
 *
-* 	@\param	arg	Number of blocks of memory to be allocated
+* 	@\param	arg		Number of 32-bit words to be allocated
 *
-* 	@\return	On success it returns SUCCESS, 
-* 			On failure the function FAILED
+* 	@\return		On success it returns SUCCESS, 
+* 					On failure it returns FAILED
 *
 */
 mem_status allocate_memory(char arg[]);

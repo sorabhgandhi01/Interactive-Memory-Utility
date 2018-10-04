@@ -10,21 +10,26 @@
 #include "help.h"
 
 /**
- * @\brief help()
- * This function displays all the available commands that the program can perform  
- * @\return SUCCESS or FAILED
-**/
-
+--------------------------------------------------------------------------------------------
+help
+--------------------------------------------------------------------------------------------
+*   This function will list the available commands and how to invoke them
+*
+*   @\param     void
+*
+*   @\return    "SUCCESS"
+*
+*/
 mem_status help()
 {
-	printf("Usage: [Command] [argument] \n\n The following commands are supported \n	\
-    allocate <N block>\n 	\
+	printf("Usage: [Command] [argument] \n\n The following commands are supported \n \
+		allocate <N block>\n	\
 	free \n	\
 	read <flag> <arg> <next N blocks>\n	\
 	write <flag> <arg> <data> \n	\
-	invert <flag> <arg> <next N blocks> \n 	\
-	wpattern <flag> <arg> <next N blocks> <seed> \n 	\
-	vpattern <flag> <arg> <next N blocks> <seed> \n 	\
+	invert <flag> <arg> <next N blocks> \n	\
+	wpattern <flag> <arg> <next N blocks> <seed> \n	\
+	vpattern <flag> <arg> <next N blocks> <seed> \n	\
 	exit \n ");
 	
 	return SUCCESS;

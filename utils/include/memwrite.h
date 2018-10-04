@@ -9,19 +9,22 @@
 #ifndef _MEMWRITE_H
 #define _MEMWRITE_H
 
+/*own header*/
 #include "global.h"
 
 /**
 --------------------------------------------------------------------------------------------------
-memWrite
+write_memory
 --------------------------------------------------------------------------------------------------
-* This function will write data into the specified memory block
+*	This function will write data into the specified memory block
 *
-* 	@\param	addr	Memory address specified by the user
+* 	@\param	addr	contains flag, Memory address/offset specified by the user and the value to be 
+*					written in the memory
 *
-* 	@\return	None
-*
+* 	@\return		On success it returns SUCCESS,
+*                   On failure it returns FAILED
 */
 mem_status write_memory(char arg[]);
+
 
 #endif

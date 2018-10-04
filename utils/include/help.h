@@ -1,7 +1,7 @@
 /**
  * @\file	help.h
  * @\author	Sorabh Gandhi / Sanju Prakash Kannioth
- * @\brief	This header file contains the declaration of help functionality of memory utils
+ * @\brief	This header file contains the declaration of help functionality for memory utils
  * @\date	09/25/2018
  *
  */											   
@@ -15,11 +15,11 @@
 --------------------------------------------------------------------------------------------
 help
 --------------------------------------------------------------------------------------------
-* This function will list the available commands and how to invoke them
+*	This function will list the available commands and how to invoke them
 *
 * 	@\param		void
 *
-* 	@\return	None
+* 	@\return	"SUCCESS"
 *
 */
 mem_status help();

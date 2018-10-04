@@ -9,19 +9,22 @@
 #ifndef _XORINVERT_H
 #define _XORINVERT_H
 
+/*own header*/
 #include "global.h"
 
 /**
 --------------------------------------------------------------------------------------------------
-xorInvert
+invert_memory
 --------------------------------------------------------------------------------------------------
-* This function will invert the data of specified memory block
+*	This function will invert the data of specified memory block
 *
-* 	@\param	arg	memory address specified by the user
+* 	@\param	arg		contains flag, Memory address/offset specified by the user and number of 
+*                   next 'N' blocks
 *
-* 	@\return	None
-*
+* 	@\return		On success it returns SUCCESS,
+*                   On failure it returns FAILED
 */
 mem_status invert_memory(char arg[]);
+
 
 #endif

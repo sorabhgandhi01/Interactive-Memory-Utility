@@ -10,11 +10,16 @@
 #include "memfree.h"
 
 /**
- * @\brief free_memory()
- * This function frees the dynamically allocated memory  
- * @\return SUCCESS or FAILED
-**/										   
-									   
+--------------------------------------------------------------------------------------------------
+free_memory
+--------------------------------------------------------------------------------------------------
+* This function releases the specified memory block in the heap segment
+*
+*   @\param     None
+*
+*   @\return    "SUCCESS"
+*
+*/									   
 mem_status free_memory()
 {
 	free(g_blockptr);

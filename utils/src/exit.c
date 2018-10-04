@@ -6,13 +6,19 @@
  *
  */
 
+/*own header file*/
 #include "exit.h"
 
 /**
- * @\brief exit_util()
- * This function exits the memory util
-**/	
-
+--------------------------------------------------------------------------------------------
+exit_util
+--------------------------------------------------------------------------------------------
+* This function exits the memory util
+*
+*   @\param     void
+*
+*   @\return    None
+**/
 mem_status exit_util()
 {	
 

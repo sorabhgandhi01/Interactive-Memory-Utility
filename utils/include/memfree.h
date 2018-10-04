@@ -9,6 +9,7 @@
 #ifndef _MEMFREE_H
 #define _MEMFREE_H
 
+/*own header*/
 #include "global.h"
 
 /**
@@ -17,11 +18,12 @@ free_memory
 --------------------------------------------------------------------------------------------------
 * This function releases the specified memory block in the heap segment
 *
-* 	@\param	arg	Memory address to be released
+* 	@\param		None
 *
-* 	@\return	None
+* 	@\return	"SUCCESS"
 *
 */
 mem_status free_memory();
+
 
 #endif
