@@ -19,7 +19,8 @@ OBJ := $(SRC:.c=.o)
 memory_util: $(OBJ)
 	$(CC) -o memory_util $(OBJ) $(CFLAGS)
 
-clean:
-	rm -f *.o memory_util
 test: memory_util test.txt
 	./memory_util < test.txt
+
+clean:
+	rm -f *.o *.txt  memory_util
