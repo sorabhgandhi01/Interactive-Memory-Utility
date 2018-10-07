@@ -1,3 +1,4 @@
+/*CUnit library headers */
 #include <CUnit/Automated.h>
 #include <CUnit/Basic.h>
 
@@ -37,9 +38,21 @@ void test_allocate_function(void)
 
 void test_write_function(void)
 {
+	/*test the write_memory function with valid set of parameters*/
+	CU_ASSERT_EQUAL((write_memory("-b 2 FF32")), 1);
+	CU_ASSERT_EQUAL((write_memory("-b 9 ABCD")), 1);
+    
+	/*test the write_memory function with incorrect offset number*/
+	CU_ASSERT_NOT_EQUAL((write_memory("-b 11 FFFF")), 1);
+	CU_ASSERT_NOT_EQUAL((write_memory("-b 100 FFFF")), 1);
+
+	/*test the write_memory function with incorrect address*/
+	CU_ASSERT_NOT_EQUAL((write_memory("-a FFFF AB")), 1);
+	CU_ASSERT_NOT_EQUAL((write_memory("-a 1234 AB")), 1);
+
+	/*test if global variables are not overwritten*/
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
-	CU_ASSERT_EQUAL((write_memory("-b 2 FF32")),1);
-    CU_ASSERT_NOT_EQUAL((write_memory("-b 11 FFFF")),1);
+	CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 

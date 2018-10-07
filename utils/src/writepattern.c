@@ -48,6 +48,13 @@ mem_status write_pattern(char arg[])
 
 	sscanf(arg, "%s %s %s %s", flag, addr, r_bytes, r_seed); // Splits the user input into address, block size and seed value
 
+	/*Check if memory is not allocate before write call*/
+    if ((g_blockptr == NULL) || (g_nblock == 0)) {
+        print_msg("No memory block allocated. First allocate a memory using allocate command\n");
+        return FAILED;
+    }
+
+
 	if ((flag[0] == '-') && (flag[1] == 'a')) {
 
 		uint64_t useraddr = chtol(addr); // Converts string to long

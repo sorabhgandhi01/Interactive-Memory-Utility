@@ -24,7 +24,11 @@ exit_util
 **/
 mem_status exit_util()
 {	
-
-	exit(EXIT_SUCCESS);
+	if (g_blockptr == NULL)
+		exit(EXIT_SUCCESS);
+	else {
+		print_msg("Release the allocate memory using free command, before exit\n");
+		
+		return FAILED;
+	}
 }
-

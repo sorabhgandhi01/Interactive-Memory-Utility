@@ -30,13 +30,6 @@ allocate_memory
 */
 mem_status allocate_memory(char arg[])
 {
-	uint32_t digit = strlen(arg);
-
-    /* Print invalid if user enters 32bit words greater than 99999 */
-	if (digit > 5) {
-		print_msg("Invalid number of 32bit words\n");
-		return FAILED;
-	}
 
 	/* Print invalid if user does not enter 32bit words*/
 	if (arg == NULL) {
@@ -45,6 +38,18 @@ mem_status allocate_memory(char arg[])
 	}
 
 	g_nblock = atoi(arg);			//convert the input data into decimal
+
+    /* Print invalid if user enters 32bit words greater than 1000 */
+    if ((g_nblock >= 1001) || (g_nblock == 0)) {
+        print_msg("Invalid number of 32bit words. Only use 32bit words in the range of 1 to 1000\n");
+        return FAILED;
+    }
+
+	/* Check if previously allocated memory is free*/
+	if (g_blockptr != NULL) {
+		print_msg("Free the previously allocated memory first and then continue with new allocation\n");
+		return FAILED;
+	}
 
 	/*dynamically allocate specified 32bit words in the heap segment*/
 	g_blockptr = (uint32_t *) malloc( (g_nblock) * sizeof(uint32_t));

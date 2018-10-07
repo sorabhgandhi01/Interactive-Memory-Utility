@@ -26,6 +26,9 @@ free_memory
 mem_status free_memory()
 {
 	free(g_blockptr);
+
+	g_blockptr = NULL;
+	g_nblock = 0;
 	
 	return SUCCESS;
 }

@@ -33,12 +33,18 @@ mem_status read_memory(char arg[])
 
 	sscanf(arg, "%s %s %s", flag, addr, r_bytes); //Splits user input to address and block size
 
+	/*Check if memory is not allocate before read call*/
+    if ((g_blockptr == NULL) || (g_nblock == 0)) {
+        print_msg("No memory block allocated. First allocate a memory using allocate command\n");
+        return FAILED;
+    }
+
     if ((flag[0] == '-') && (flag[1] == 'a')) {
 
 	    uint64_t useraddr = chtol(addr); // Converts string to long
 	    uint32_t block = chtoi(r_bytes); // Converts string to integer
 	    uint32_t i = 0, flag = 0, j = 0;
-	
+
 	    /* Loop to display the contents from the user specified memory */
 	    for (i = 0; i < g_nblock; i++)
 	    {
