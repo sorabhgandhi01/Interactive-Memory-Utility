@@ -12,23 +12,9 @@
 #include "help.h"
 #include "exit.h"         
 
-extern uint32_t *g_blockptr;
-extern uint32_t g_nblock;
-
-extern mem_status allocate_memory (char arg[]);
-extern mem_status free_memory (char arg[]);
-extern mem_status write_memory (char arg[]);
-extern mem_status read_memory (char arg[]);
-extern mem_status invert_memory (char arg[]);
-extern mem_status write_pattern (char arg[]);
-extern mem_status verify_pattern (char arg[]);
-extern mem_status help (char arg[]);
-extern mem_status exit_util (char arg[]);
-
-
 int init_test (void)
 {
-	char block[2] = "5";
+	char block[3] = "10";
 	allocate_memory(block);
 
 	return 0;
@@ -46,33 +32,42 @@ int deinit_test (void)
 void test_allocate_function(void)
 {
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
-	CU_ASSERT_EQUAL(5, g_nblock);
+	CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 void test_write_function(void)
 {
-
+	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	CU_ASSERT_EQUAL((write_memory("-b 2 FF32")),1);
 }
 
 
 void test_read_function(void)
 {
 
+	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	CU_ASSERT_EQUAL((read_memory("-b 1 3")),1);
 }
 
 void test_invert_function(void)
 {
 
+	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	CU_ASSERT_EQUAL((invert_memory("-b 1 3")),1);
 }
 
 void test_wrpattern_function(void)
 {
 
+	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")),1);
 }
 
 void test_vpattern_function(void)
 {
 
+	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	CU_ASSERT_EQUAL((write_pattern("-b 1 6 102")),1);
 }
 
 int register_test_suite(void) {
@@ -84,7 +79,12 @@ int register_test_suite(void) {
         return -1;
     }
 
-    if ((NULL == CU_add_test(pSuite, "Allocate functionality test", test_allocate_function)))
+    if ((NULL == CU_add_test(pSuite, "Allocate functionality test", test_allocate_function)) ||
+    	(NULL == CU_add_test(pSuite, "Write functionality test", test_write_function)) ||
+    	(NULL == CU_add_test(pSuite, "Read functionality test", test_read_function)) ||
+    	(NULL == CU_add_test(pSuite, "Invert functionality test", test_invert_function)) ||
+    	(NULL == CU_add_test(pSuite, "Write pattern functionality test", test_wrpattern_function)) ||
+    	(NULL == CU_add_test(pSuite, "Verify pattern functionality test", test_vpattern_function))) 
     {
         return -1;
     }
