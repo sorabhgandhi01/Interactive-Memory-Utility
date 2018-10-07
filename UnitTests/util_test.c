@@ -39,6 +39,7 @@ void test_write_function(void)
 {
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
 	CU_ASSERT_EQUAL((write_memory("-b 2 FF32")),1);
+    CU_ASSERT_NOT_EQUAL((write_memory("-b 11 FFFF")),1);
 }
 
 
@@ -47,6 +48,7 @@ void test_read_function(void)
 
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
 	CU_ASSERT_EQUAL((read_memory("-b 1 3")),1);
+    CU_ASSERT_NOT_EQUAL((read_memory("-b 9 2")),1);
 }
 
 void test_invert_function(void)
@@ -54,6 +56,7 @@ void test_invert_function(void)
 
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
 	CU_ASSERT_EQUAL((invert_memory("-b 1 3")),1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-b 9 2")),1);
 }
 
 void test_wrpattern_function(void)
@@ -61,6 +64,7 @@ void test_wrpattern_function(void)
 
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
 	CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")),1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b 9 2 102")),1);
 }
 
 void test_vpattern_function(void)
@@ -68,6 +72,7 @@ void test_vpattern_function(void)
 
 	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
 	CU_ASSERT_EQUAL((write_pattern("-b 1 6 102")),1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 9 2 102")),1);
 }
 
 int register_test_suite(void) {
