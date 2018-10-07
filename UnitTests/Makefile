@@ -3,8 +3,9 @@
 CC = gcc
 
 CFLAGS = -Wall \
-     -Werror \
-     -I../utils/include/
+	-Werror \
+	-DUNIT_TEST \
+	-I../utils/include/
 
 LIBS = -lcunit
 

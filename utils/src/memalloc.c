@@ -6,6 +6,13 @@
  *
  */											   
 
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+
 /* Own headers */
 #include "memalloc.h"
 
@@ -27,13 +34,13 @@ mem_status allocate_memory(char arg[])
 
     /* Print invalid if user enters 32bit words greater than 99999 */
 	if (digit > 5) {
-		printf("Invalid number of 32bit words\n");
+		print_msg("Invalid number of 32bit words\n");
 		return FAILED;
 	}
 
 	/* Print invalid if user does not enter 32bit words*/
 	if (arg == NULL) {
-		printf("Number of 32bit words to allocate is not specified\n");
+		print_msg("Number of 32bit words to allocate is not specified\n");
 		return FAILED;
 	}
 
@@ -43,10 +50,10 @@ mem_status allocate_memory(char arg[])
 	g_blockptr = (uint32_t *) malloc( (g_nblock) * sizeof(uint32_t));
 
 	if (g_blockptr != NULL) {
-		printf("%ld bytes of Memory Allocated and the starting address of the block is %p \n", ((g_nblock) * sizeof(uint32_t)), (void *)g_blockptr);
+		print_msg("%ld bytes of Memory Allocated and the starting address of the block is %p \n", ((g_nblock) * sizeof(uint32_t)), (void *)g_blockptr);
 		return SUCCESS;
 	} else {
-		printf("Memory allocation failed\n");
+		print_msg("Memory allocation failed\n");
 		return FAILED;
 	}
 }

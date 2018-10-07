@@ -9,6 +9,9 @@
 #ifndef _MEMFREE_H
 #define _MEMFREE_H
 
+#include "stdio.h"
+#include "stdlib.h"
+
 /*own header*/
 #include "global.h"
 

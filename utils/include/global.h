@@ -10,11 +10,9 @@
 #ifndef _GLOBAL_H
 #define _GLOBAL_H
 
-/*system headers*/
+/*System header*/
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
-#include <string.h>
 
 /*
 **	status code
@@ -72,6 +70,20 @@ c_random
 * 	@\return		 Returns the pseudo random number
 **/
 uint32_t c_random(uint64_t *addr, uint32_t seed);
+
+
+/**
+--------------------------------------------------------------------------------------------
+print_msg
+--------------------------------------------------------------------------------------------
+*	This function prints the user message to console
+*
+*	@\param	msg		User message to print
+*
+*	@\return		None
+*
+*/
+void print_msg(const char *msg, ...);
 
 
 #endif

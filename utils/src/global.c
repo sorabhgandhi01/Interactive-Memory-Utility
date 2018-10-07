@@ -6,10 +6,16 @@
  *
  */
 
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
+#include <stdarg.h>
 
 /*own header*/
 #include "global.h"
+
 
 /**
 --------------------------------------------------------------------------------------------
@@ -122,4 +128,28 @@ uint32_t c_random(uint64_t *addr, uint32_t seed)
 	ret = ret ^ seed;				// xor ret and seed
 	
 	return ret;
+}
+
+
+/**
+--------------------------------------------------------------------------------------------
+print_msg
+--------------------------------------------------------------------------------------------
+*   This function prints the user message to console
+*
+*   @\param msg     User message to print
+*
+*   @\return        None
+*
+*/
+void print_msg(const char *msg, ...)
+{
+#ifndef UNIT_TEST
+	va_list va_args;
+
+	va_start(va_args, msg);
+	vprintf(msg, va_args);
+	va_end(va_args);
+	fflush(stdout);
+#endif
 }

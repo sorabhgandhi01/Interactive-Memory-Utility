@@ -5,6 +5,12 @@
  * @\date	09/25/2018
  *
  */											   
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
 
 /* Own headers */
 #include <memwrite.h>
@@ -48,14 +54,14 @@ mem_status write_memory(char arg[])
 
 				g_blockptr[i] = data;			//write the user data to the specified memory block
 
-				printf("Data written at %p is %x\n", &g_blockptr[i], g_blockptr[i]);
+				print_msg("Data written at %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 				flag = 1;
 				break;
 			}
 		}
 
 		if (flag != 1) {
-			printf("Invalid memory address\n");
+			print_msg("Invalid memory address\n");
 			return FAILED;
 		}
 
@@ -67,19 +73,19 @@ mem_status write_memory(char arg[])
 		uint32_t offset = chtoi(addr);		//Converts string to long
 		uint32_t data = chtoi(hex_data);	//Converts string to int
 		
-		if (offset > g_nblock) {
-			printf("Invalid offset\n");
+		if (offset >= g_nblock) {
+			print_msg("Invalid offset\n");
 			return FAILED;
 		}
 
 		g_blockptr[offset] = data;			//write the user data to the specified memory block
 
-		printf("Data written at %p is %x\n", &g_blockptr[offset], g_blockptr[offset]); 	
+		print_msg("Data written at %p is %x\n", &g_blockptr[offset], g_blockptr[offset]); 	
 
 		return SUCCESS;
 	}
 	else {
-		printf("Invalid flag\n");
+		print_msg("Invalid flag\n");
 
 		return FAILED;
 	}

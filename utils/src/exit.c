@@ -5,6 +5,9 @@
  * @\date	09/25/2018
  *
  */
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
 
 /*own header file*/
 #include "exit.h"

@@ -5,6 +5,11 @@
  * @\date	09/25/2018
  *
  */	
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 
 /* Own headers */
 #include <memdisplay.h>
@@ -38,11 +43,11 @@ mem_status read_memory(char arg[])
 	    for (i = 0; i < g_nblock; i++)
 	    {
 		    if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) {
-			    printf("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
+			    print_msg("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 			    if ((block != 0) && (block <= (g_nblock - (i+1))))
 			    {
 				    for (j = (i+1); j < (block + i + 1); j++)
-					printf("Data at memory address %p is %x\n", &g_blockptr[j], g_blockptr[j]);
+					print_msg("Data at memory address %p is %x\n", &g_blockptr[j], g_blockptr[j]);
 				    flag = 1;
 				    break;
 			    }
@@ -52,14 +57,14 @@ mem_status read_memory(char arg[])
 				    break;
 			    }
 			    else {
-				    printf("Invalid number of 32-bit words\n");
+				    print_msg("Invalid number of 32-bit words\n");
 				    return FAILED;
 			    }
 		    }
 	    }
 	
 		if (flag != 1) {
-			printf("Invalid memory address\n");
+			print_msg("Invalid memory address\n");
 			return FAILED;
 		}
 		return SUCCESS;
@@ -70,24 +75,24 @@ mem_status read_memory(char arg[])
 		uint32_t i = 0;
 
 		if (offset >= g_nblock) {
-			printf("Invalid offset\n");
+			print_msg("Invalid offset\n");
 			return FAILED;
 		}
 
 		if (block >= (g_nblock - offset)) {
-			printf("Invalid number of next 32 bit words\n");
+			print_msg("Invalid number of next 32 bit words\n");
 			return FAILED;
 		}
         
         for (i = offset; i <= (offset + block); i++)
         {
-			printf("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
+			print_msg("Data at memory address %p is %x\n", &g_blockptr[i], g_blockptr[i]);
 		}
 
 		return SUCCESS;
 	}
 	else {
-		printf("Invalid flag\n");
+		print_msg("Invalid flag\n");
 
 		return FAILED;
 	}

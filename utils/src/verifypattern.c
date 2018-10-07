@@ -5,9 +5,15 @@
  * @\date	09/25/2018
  *
  */
-
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
 #include <time.h>
 
+
+/*Own header */
 #include "verifypattern.h"
 
 /**
@@ -60,9 +66,9 @@ mem_status verify_pattern(char arg[])
 
 				/*Check if 32bit address contains the same random number generated for a particular seed */
 				if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {
-					printf("Pattern Matched\n");
+					print_msg("Pattern Matched\n");
 				} else {
-					printf("Expected value is %x	Actual value is %x	Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
+					print_msg("Expected value is %x	Actual value is %x	Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
 				}
 
 				/*Check if the user has specified a valid number of next "N" blocks*/
@@ -72,9 +78,9 @@ mem_status verify_pattern(char arg[])
 
 						/*Check if 32bit address contains the same random number generated for a particular seed */
 						if (g_blockptr[j] == c_random((uint64_t *)&g_blockptr[j], seed)) {
-							printf("Pattern Matched\n");
+							print_msg("Pattern Matched\n");
 						} else {
-							printf("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
+							print_msg("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
 						}
 					}
 				
@@ -88,7 +94,7 @@ mem_status verify_pattern(char arg[])
 					break;
 				}
 				else {
-					printf("Invalid number of 32-bit words\n");
+					print_msg("Invalid number of 32-bit words\n");
 					return FAILED;
 				}
 			}
@@ -96,13 +102,13 @@ mem_status verify_pattern(char arg[])
 
 		/*Invalid addres if the user address does not match with any of the 32bit word*/
 		if (flag != 1) {
-			printf("Invalid Memory address\n");
+			print_msg("Invalid Memory address\n");
 			return FAILED;
 		}
 		
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        printf("Time taken to perform this operation is %f seconds\n", ((double)t/CLOCKS_PER_SEC));
+        print_msg("Time taken to perform this operation is %f seconds\n", ((double)t/CLOCKS_PER_SEC));
 
 		return SUCCESS;
 	}
@@ -116,13 +122,13 @@ mem_status verify_pattern(char arg[])
 
 		/*Check for an out of range offset*/
         if (offset >= g_nblock) {
-            printf("Invalid offset\n");
+            print_msg("Invalid offset\n");
             return FAILED;
         }
 
 		/*Check for an out of range 'N blocks' */
         if (block >= (g_nblock - offset)) {
-            printf("Invalid number of next 32 bit words\n");
+            print_msg("Invalid number of next 32 bit words\n");
             return FAILED;
         }
 
@@ -130,21 +136,21 @@ mem_status verify_pattern(char arg[])
         {
 			/*Check if 32bit address contains the same random number generated for a particular seed */
 			if (g_blockptr[i] == c_random((uint64_t *)&g_blockptr[i], seed)) {                                                                                                   
- 				printf("Pattern Matched\n");
+ 				print_msg("Pattern Matched\n");
  			} else {
- 				printf("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
+ 				print_msg("Expected value is %x    Actual value is %x      Address is %p\n", g_blockptr[i], c_random((uint64_t *)&g_blockptr[i], seed), &g_blockptr[i]);
 			}
         }
 		
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));		
+        print_msg("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));		
 
         return SUCCESS;
 
     }
     else {
-        printf("Invalid flag\n");
+        print_msg("Invalid flag\n");
 
         return FAILED;
     }

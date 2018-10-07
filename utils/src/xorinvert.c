@@ -7,7 +7,12 @@
  */
 
 /* System headers */
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h> 
 #include <time.h>
+
 
 /* Own headers */
 #include <xorinvert.h>
@@ -53,12 +58,12 @@ mem_status invert_memory(char arg[])
 			/*Check if the user specified address matches with the allocated 32bit word address*/
 			if ((uint64_t *) &g_blockptr[i] == (uint64_t *) useraddr) 
 			{
-				printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
+				print_msg("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
 				/*Check if the user has specified a valid number of next "N" blocks*/
 				if ((block != 0) && (block <= (g_nblock - (i+1))))
 				{
 					for (j = (i+1); j < (block + i + 1); j++)
-						printf("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
+						print_msg("Inverted Data at memory address %p is %x\n", &g_blockptr[j], (g_blockptr[j]^0xFFFFFFFF));
 				
 					flag = 1;
 					break;
@@ -70,7 +75,7 @@ mem_status invert_memory(char arg[])
 				}
 				else 
 				{
-					printf("Invalid number of 32-bit words\n");
+					print_msg("Invalid number of 32-bit words\n");
 					return FAILED;
 				}
 			}
@@ -78,13 +83,13 @@ mem_status invert_memory(char arg[])
 
 		/*Invalid addres if the user address does not match with any of the 32bit word*/
 		if (flag != 1) {
-			printf("Invalid memory address\n");
+			print_msg("Invalid memory address\n");
 			return FAILED; 
 		}
 
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-		printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+		print_msg("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
 
 		return SUCCESS;
 	}
@@ -97,29 +102,29 @@ mem_status invert_memory(char arg[])
 
 		/*Check for an out of range offset*/
         if (offset >= g_nblock) {
-            printf("Invalid offset\n");
+            print_msg("Invalid offset\n");
             return FAILED;
         }
 
 		/*Check for an out of range 'N blocks' */
         if (block >= (g_nblock - offset)) {
-            printf("Invalid number of next 32 bit words\n");
+            print_msg("Invalid number of next 32 bit words\n");
             return FAILED;
         }
 
         for (i = offset; i <= (offset + block); i++)
         {
-			printf("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
+			print_msg("Inverted Data at memory address %p is %x\n", &g_blockptr[i], (g_blockptr[i]^0xFFFFFFFF));
         }
 		
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        printf("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+        print_msg("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
 		
 		return SUCCESS;
     }
     else {
-        printf("Invalid flag\n");
+        print_msg("Invalid flag\n");
         return FAILED;
 	}
 }

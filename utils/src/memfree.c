@@ -5,6 +5,9 @@
  * @\date	09/25/2018
  *
  */		
+/*system headers*/
+#include <stdio.h>
+#include <stdlib.h>
 
 /* Own headers */
 #include "memfree.h"
