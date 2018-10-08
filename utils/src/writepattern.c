@@ -108,7 +108,7 @@ mem_status write_pattern(char arg[])
 
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        print_msg("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+        print_msg("Time taken to perform this operation is %f second\n", ((double)t/CLOCKS_PER_SEC));
 
 		return SUCCESS;
 	}
@@ -140,7 +140,7 @@ mem_status write_pattern(char arg[])
 
 		/*Calculate total time by subtracting t with present time*/
 		t = clock() - t;
-        print_msg("Time taken to perform this operation is %f\n", ((double)t/CLOCKS_PER_SEC));
+        print_msg("Time taken to perform this operation is %f second\n", ((double)t/CLOCKS_PER_SEC));
 
         return SUCCESS;
     }

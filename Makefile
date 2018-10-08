@@ -8,8 +8,6 @@ CFLAGS = -Wall \
 	 -O0 \
 	 -Iutils/include/
 
-INC_PATH = utils/include
-
 vpath %.c utils/src
 
 SRC := memalloc.c memfree.c memdisplay.c memwrite.c xorinvert.c main.c help.c exit.c global.c writepattern.c verifypattern.c
@@ -23,4 +21,4 @@ test: memory_util test.txt
 	./memory_util < test.txt
 
 clean:
-	rm -f *.o *.txt  memory_util
+	rm -f *.o memory_util

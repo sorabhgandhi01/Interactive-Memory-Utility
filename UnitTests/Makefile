@@ -9,9 +9,6 @@ CFLAGS = -Wall \
 
 LIBS = -lcunit
 
-INC_PATH = utils/include
-
-vpath %.h ../utils/include
 vpath %.c ../utils/src
 
 SRC := memalloc.c memfree.c memdisplay.c memwrite.c xorinvert.c help.c exit.c global.c writepattern.c verifypattern.c util_test.c
@@ -22,4 +19,4 @@ unittest: $(OBJ)
 	$(CC) -o unittest $(OBJ) $(CFLAGS) $(LIBS)
 
 clean:
-	rm -f *.o *.txt unittest                        
+	rm -f *.o *.xml unittest                        
