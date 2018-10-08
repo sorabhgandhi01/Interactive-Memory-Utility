@@ -15,7 +15,7 @@
 
 int init_test (void)
 {
-	char block[3] = "10";
+	char block[3] = "A";
 	allocate_memory(block);
 
 	return 0;
@@ -58,34 +58,82 @@ void test_write_function(void)
 
 void test_read_function(void)
 {
-
-	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+	/*test the read_memory function with valid set of parameters*/
 	CU_ASSERT_EQUAL((read_memory("-b 1 3")),1);
-    CU_ASSERT_NOT_EQUAL((read_memory("-b 9 2")),1);
+    CU_ASSERT_EQUAL((read_memory("-b 3 6")),1);
+
+    /*test the read_memory function with incorrect offset number*/
+    CU_ASSERT_NOT_EQUAL((read_memory("-b 11 2")),1);
+    CU_ASSERT_NOT_EQUAL((read_memory("-b 100 11")),1);
+
+    /*test the read_memory function with incorrect address*/
+    CU_ASSERT_NOT_EQUAL((read_memory("-a FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((read_memory("-a 1234 AB")), 1);
+
+    /*test if global variables are not overwritten*/
+    CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+    CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 void test_invert_function(void)
 {
+    /*test the invert_memory function with valid set of parameters*/
+    CU_ASSERT_EQUAL((invert_memory("-b 1 3")),1);
+    CU_ASSERT_EQUAL((invert_memory("-b 3 6")),1);
 
-	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
-	CU_ASSERT_EQUAL((invert_memory("-b 1 3")),1);
-    CU_ASSERT_NOT_EQUAL((invert_memory("-b 9 2")),1);
+    /*test the invert_memory function with incorrect offset number*/
+    CU_ASSERT_NOT_EQUAL((invert_memory("-b 11 2")),1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-b 100 11")),1);
+
+    /*test the invert_memory function with incorrect address*/
+    CU_ASSERT_NOT_EQUAL((invert_memory("-a FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-a 1234 AB")), 1);
+
+    /*test if global variables are not overwritten*/
+    CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+    CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 void test_wrpattern_function(void)
 {
+    /*test the write_pattern function with valid set of parameters*/
+    CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")),1);
+    CU_ASSERT_EQUAL((write_pattern("-b 3 6 102")),1);
 
-	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
-	CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")),1);
-    CU_ASSERT_NOT_EQUAL((write_pattern("-b 9 2 102")),1);
+    /*test the write_pattern function with incorrect offset number*/
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b 11 2 102")),1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b 100 11 102")),1);
+
+    /*test the write_pattern function with incorrect address*/
+    CU_ASSERT_NOT_EQUAL((write_pattern("-a FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-a 1234 AB")), 1);
+
+    /*test if global variables are not overwritten*/
+    CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+    CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 void test_vpattern_function(void)
 {
+	/*test the verify_pattern function with valid set of parameters*/
+    CU_ASSERT_EQUAL((verify_pattern("-b 1 3 102")),1);
+    CU_ASSERT_EQUAL((verify_pattern("-b 3 6 102")),1);
 
-	CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
-	CU_ASSERT_EQUAL((write_pattern("-b 1 6 102")),1);
-    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 9 2 102")),1);
+    /*test the verify_pattern function with incorrect offset number*/
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 102")),1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 102")),1);
+
+    /*test the verify_pattern function with incorrect address*/
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-a FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-a 1234 AB")), 1);
+
+    /*test the verify_pattern function with incorrect seed value*/
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 111")),1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 12")),1);
+
+    /*test if global variables are not overwritten*/
+    CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);
+    CU_ASSERT_EQUAL(10, g_nblock);
 }
 
 int register_test_suite(void) {
@@ -96,7 +144,7 @@ int register_test_suite(void) {
     if (NULL == pSuite) {
         return -1;
     }
-
+    /*Adding tests to the suite */
     if ((NULL == CU_add_test(pSuite, "Allocate functionality test", test_allocate_function)) ||
     	(NULL == CU_add_test(pSuite, "Write functionality test", test_write_function)) ||
     	(NULL == CU_add_test(pSuite, "Read functionality test", test_read_function)) ||
@@ -124,10 +172,6 @@ int main()
 	/* Run all tests using CUnit Basic interface */
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
-
-    /* Run all tests using the CUnit Automated interface */
-	//CU_set_output_filename("test");
-	//CU_automated_run_tests();
 
     CU_cleanup_registry();
     return CU_get_error();

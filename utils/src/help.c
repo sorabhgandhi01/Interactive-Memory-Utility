@@ -36,6 +36,6 @@ mem_status help()
 	exit \n\n	\
 	Use Flag --> '-a' to specify address and '-b' to specify offset\n\
 	\tUse arg --> Offset value if '-b' is flag and Address if '-a' is flag\n\n\
-	\tNote: read, write, invert, wpattern and vpattern take hexadecimal inputs\n"); 	
+	\tNote: allocate, read, write, invert, wpattern and vpattern take hexadecimal inputs for the N blocks field and data field\n"); 	
 	return SUCCESS;
 }
