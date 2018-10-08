@@ -173,6 +173,10 @@ int main()
 	CU_basic_set_mode(CU_BRM_VERBOSE);
 	CU_basic_run_tests();
 
+    /* Run all tests using the CUnit Automated interface */
+	CU_set_output_filename("test");
+	CU_automated_run_tests();
+
     CU_cleanup_registry();
     return CU_get_error();
 }

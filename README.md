@@ -4,6 +4,41 @@ INTRODUCTION
 	This project is of an interactive command line utility that provides the ability to modify and 
 	examine the memory and also provides basic memory test functionality.
 
+PROJECT FOLDER
+--------------
+
+	Interactive Memory Utility
+		|
+		|- utils
+		....|- include
+		........|- help.h
+        ........|- memalloc.h
+        ........|- memDisplay.h
+        ........|- memwrite.h
+        ........|- xorinvert.h
+        ........|- writepattern.h
+        ........|- verifypattern.h
+        ........|- exit.h
+        ........|- global.h
+		....|- src
+		........|- help.c
+		........|- memalloc.c
+		........|- memDisplay.c
+		........|- memwrite.c
+		........|- xorinvert.c
+		........|- writepattern.c
+		........|- verifypattern.c
+		........|- exit.c
+		........|- global.c
+		|- UnitTests
+		....|- util_test.c
+		....|- Makefile
+		|- main.c
+		|- Makefile
+		|- test.txt
+		|- README.md
+
+
 BUILD and RUN STEPS
 -------------------
 
@@ -14,7 +49,7 @@ BUILD and RUN STEPS
 
 
 	PROJECT BUILD STEPS  
-	===================  
+	===================
 	1.) Go to the project folder, cd [FolderName]/  
 	2.) Run make (This command compiles the code and generates an respective executable)
 	3.) Run make test (This command compiles the code,  generates the executabtable and runs the code using the test script)
@@ -22,6 +57,13 @@ BUILD and RUN STEPS
 	RUN STEPS  
 	=========  
 	1.) ./main
+
+	UNIT TEST RUN STEPS
+	===================
+	1.) First install all the Unit-test dependency using the command - sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
+	2.) Go to the UnitTests folder using the command - cd UnitTests
+	3.) Run make
+	4.) ./unittest
 
 LIST OF MEMORY MANIPULATION COMMANDS
 ------------------------------------
