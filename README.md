@@ -12,14 +12,14 @@ PROJECT FOLDER
 		|- utils
 		....|- include
 		........|- help.h
-        ........|- memalloc.h
-        ........|- memDisplay.h
-        ........|- memwrite.h
-        ........|- xorinvert.h
-        ........|- writepattern.h
-        ........|- verifypattern.h
-        ........|- exit.h
-        ........|- global.h
+		........|- memalloc.h
+		........|- memDisplay.h
+		........|- memwrite.h
+		........|- xorinvert.h
+		........|- writepattern.h
+		........|- verifypattern.h
+		........|- exit.h
+		........|- global.h
 		....|- src
 		........|- help.c
 		........|- memalloc.c
@@ -74,19 +74,19 @@ LIST OF MEMORY MANIPULATION COMMANDS
 
 	Note :- The commands allocate, read, write, invert, wpattern and verify pattern take hexadecimal inputs for the block_size and data fields.
 
-	allocate [block_size] - This command is used to dynamically allocate memory according to the user entered number of blocks.
+	allocate [N block size] - This command is used to dynamically allocate memory according to the user entered number of blocks.
 
 	free - Frees the dynamically allocated memory.
 
-	read [flag] [arg] [block_size] - This command is used to read data starting from a user specified address until the user specified block size.
+	read [flag] [arg] [N block size] - This command is used to read data starting from a user specified address until the user specified block size.
 
 	write [flag] [arg] [data] - This command is used to write data at a user specified memory address.
 
-	invert [flag] [arg] [block_size] - This command is used to invert the memory contents starting from the user specified address until the user specified number of blocks.
+	invert [flag] [arg] [N block size] - This command is used to invert the memory contents starting from the user specified address until the user specified number of blocks.
 
-	wpattern [flag] [arg] [block_size] [seed] - This command is used to write pseudo random numbers starting at the user specified address until the user specified block size.
+	wpattern [flag] [arg] [N block size] [seed] - This command is used to write pseudo random numbers starting at the user specified address until the user specified block size.
 
-	vpattern [flag] [arg] [block_size] [seed] - This command is used to verify the pseudo random numbers starting at the user specified address until the user specified block size.
+	vpattern [flag] [arg] [N block size] [seed] - This command is used to verify the pseudo random numbers starting at the user specified address until the user specified block size.
 
 	exit - Close the program
 
