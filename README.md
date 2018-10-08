@@ -72,9 +72,9 @@ LIST OF MEMORY MANIPULATION COMMANDS
 
 	The supported used commands include:
 
-	Note :- The commands allocate, read, write, invert, wpattern and verify pattern take hexadecimal inputs for the block_size and data fields.
+	Note :- All the input and output data to the utility command should be in hexadecimal format
 
-	allocate [N block size] - This command is used to dynamically allocate memory according to the user entered number of blocks.
+	allocate [N blocks] - This command is used to dynamically allocate memory according to the user entered number of blocks.
 
 	free - Frees the dynamically allocated memory.
 
