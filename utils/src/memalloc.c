@@ -37,7 +37,7 @@ mem_status allocate_memory(char arg[])
 		return FAILED;
 	}
 
-	g_nblock = atoi(arg);			//convert the input data into decimal
+	g_nblock = chtoi(arg);			//convert the input data into decimal
 
     /* Print invalid if user enters 32bit words greater than 1000 */
     if ((g_nblock >= 1001) || (g_nblock == 0)) {
