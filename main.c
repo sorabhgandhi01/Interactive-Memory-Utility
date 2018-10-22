@@ -77,10 +77,11 @@ int main ()
     char input[50];			//Declare the input buffer to get the user input
 	char cmd[10];			//Declare the cmd buffer to store the input command name
 	char arg[40];			//Declare the arg buffer to store the command arguments given by the user
+	int cmd_flag = 0;
 
     memset(input, 0, sizeof(input));			//Clear the input buffer
 
-	printf("Welcome to the memory utility\n\tType 'help' to get the list of supported commands\n\n");
+	print_msg("Welcome to the memory utility\n\tType 'help' to get the list of supported commands\n\n");
 
 	/*Run the loop till user enters exit command or ctrl-c*/
 	while(1) {
@@ -95,16 +96,21 @@ int main ()
         memset(arg, 0, sizeof(arg));
 
         sscanf(input, "%s %[^\n]%*c", cmd, arg);			//Parse the user command and argument
+		cmd_flag = 0;
 
 		/*search the input command in list of commands populated in the structure*/
         for (i = 0; command_list[i].function_name; i++) {
 
-		/*Check if the particular input command matches with a command name in the structure*/
-		 if (strcmp(cmd, command_list[i].cmd_name) == 0)
-			 (*(command_list[i].function_name))(arg);			//Invoke appropriate function for the input command
-	 }
+			/*Check if the particular input command matches with a command name in the structure*/
+			 if (strcmp(cmd, command_list[i].cmd_name) == 0) {
+				 (*(command_list[i].function_name))(arg);			//Invoke appropriate function for the input command
+				cmd_flag = 1;
+			}
+		}
 
-	}
+		if (cmd_flag == 0)
+			print_msg("Invalid Command! Type help to get the list of supported commands\n");
+    }
 	
 	exit(EXIT_SUCCESS);
 }
