@@ -26,14 +26,14 @@ help
 mem_status help()
 {
 	print_msg("Usage: [Command] [argument] \n\n The following commands are supported \n \
-		allocate <N block>\n	\
-	free \n	\
-	read <flag> <arg> <next N blocks>\n	\
-	write <flag> <arg> <data> \n	\
-	invert <flag> <arg> <next N blocks> \n	\
-	wpattern <flag> <arg> <next N blocks> <seed> \n	\
-	vpattern <flag> <arg> <next N blocks> <seed> \n	\
-	exit \n\n	\
+		allocate <N block> - To allocate the new memory block\n	\
+	free - To free the previously allocated memory \n	\
+	read <flag> <arg> <next N blocks> - To read the data present in the memory\n	\
+	write <flag> <arg> <data> - To write data in the memory\n	\
+	invert <flag> <arg> <next N blocks> - To invert the data in the memory\n	\
+	wpattern <flag> <arg> <next N blocks> <seed> - To generate a random pattern\n	\
+	vpattern <flag> <arg> <next N blocks> <seed> - To verify the random pattern\n	\
+	exit - To exit the utility\n\n	\
 	Use Flag --> '-a' to specify address and '-b' to specify offset\n\
 	\tUse arg --> Offset value if '-b' is flag and Address if '-a' is flag\n\n\
 	\tNote: allocate, read, write, invert, wpattern and vpattern take hexadecimal inputs for the N blocks field and data field\n"); 	

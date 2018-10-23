@@ -77,7 +77,7 @@ int main ()
     char input[50];			//Declare the input buffer to get the user input
 	char cmd[10];			//Declare the cmd buffer to store the input command name
 	char arg[40];			//Declare the arg buffer to store the command arguments given by the user
-	int cmd_flag = 0;
+	int cmd_flag = 0;		// Flag to indicate the invalid commands
 
     memset(input, 0, sizeof(input));			//Clear the input buffer
 
@@ -108,6 +108,7 @@ int main ()
 			}
 		}
 
+		/*Notify the user for the invalid command*/
 		if (cmd_flag == 0)
 			print_msg("Invalid Command! Type help to get the list of supported commands\n");
     }

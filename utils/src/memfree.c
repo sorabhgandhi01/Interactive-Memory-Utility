@@ -25,10 +25,18 @@ free_memory
 */									   
 mem_status free_memory()
 {
-	free(g_blockptr);
+	if (g_blockptr != NULL)
+	{
+		free(g_blockptr);
 
-	g_blockptr = NULL;
-	g_nblock = 0;
+		g_blockptr = NULL;
+		g_nblock = 0;
+
+		print_msg("Freeing the allocated memory\n");
+	}
+	else {
+		print_msg("No allocated memory found! First allocate the memory then call free command\n");
+	}
 	
 	return SUCCESS;
 }
