@@ -38,7 +38,7 @@ mem_status write_pattern(char arg[])
 	char flag[3];
 	char addr[17];
 	char r_bytes[9];
-	char r_seed[9];
+	char r_seed[10];
 
 	/*clear all the buffer*/
 	memset(flag, 0, sizeof(flag));
@@ -54,6 +54,11 @@ mem_status write_pattern(char arg[])
         return FAILED;
     }
 
+	/*Check if the seed is more than 8 nibble*/
+	if ((strlen(r_seed)) > 8) {
+		print_msg("Invalid Seed Number! Enter a valid hexadecimal number in-between range 0 to FFFFFFFF\n");
+		return FAILED;
+	}
 
 	if ((strcmp(flag, "-a")) == 0) {
 

@@ -74,9 +74,9 @@ int main ()
         {NULL, NULL}
 	};
                 
-    char input[50];			//Declare the input buffer to get the user input
+    char input[60];			//Declare the input buffer to get the user input
 	char cmd[10];			//Declare the cmd buffer to store the input command name
-	char arg[40];			//Declare the arg buffer to store the command arguments given by the user
+	char arg[50];			//Declare the arg buffer to store the command arguments given by the user
 	int cmd_flag = 0;		// Flag to indicate the invalid commands
 
     memset(input, 0, sizeof(input));			//Clear the input buffer

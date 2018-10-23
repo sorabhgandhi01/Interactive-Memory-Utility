@@ -31,7 +31,7 @@ mem_status write_memory(char arg[])
 {
 	char flag[3];
 	char addr[17];
-	char hex_data[9];
+	char hex_data[10];
 
 	/*clear all the buffer*/
 	memset(addr, 0, sizeof(addr));
@@ -43,6 +43,12 @@ mem_status write_memory(char arg[])
 	/*Check if memory is not allocate before write call*/
 	if ((g_blockptr == NULL) || (g_nblock == 0)) {
 		print_msg("No memory block allocated. First allocate a memory using allocate command\n");	
+		return FAILED;
+	}
+
+	/*Check if the data is more than 8 nibble*/
+	if (strlen(hex_data) > 8) {
+		print_msg("Invalid data! Enter a valid hexadecimal number in-between range 0 to FFFFFFFF\n");
 		return FAILED;
 	}
 
