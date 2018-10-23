@@ -41,7 +41,7 @@ mem_status allocate_memory(char arg[])
 
     /* Print invalid if user enters 32bit words greater than 1000 */
     if ((g_nblock >= 1001) || (g_nblock == 0)) {
-        print_msg("Invalid number of 32bit words. Only use 32bit words in the range of 1 to 1000\n");
+        print_msg("Invalid number of 32bit words. Only use 32bit words in the range of 1 to 3E8\n");
         return FAILED;
     }
 

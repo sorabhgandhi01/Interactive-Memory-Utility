@@ -41,10 +41,18 @@ void test_write_function(void)
 	/*test the write_memory function with valid set of parameters*/
 	CU_ASSERT_EQUAL((write_memory("-b 2 FF32")), 1);
 	CU_ASSERT_EQUAL((write_memory("-b 9 ABCD")), 1);
+
+	/*test the write_memory function with incorrect offset flag*/
+    CU_ASSERT_NOT_EQUAL((write_memory("-c 11 FFFF")), 1);
+    CU_ASSERT_NOT_EQUAL((write_memory("-b0 100 FFFF")), 1);
     
 	/*test the write_memory function with incorrect offset number*/
 	CU_ASSERT_NOT_EQUAL((write_memory("-b 11 FFFF")), 1);
 	CU_ASSERT_NOT_EQUAL((write_memory("-b 100 FFFF")), 1);
+
+	/*test the write_memory function with incorrect address flag*/
+    CU_ASSERT_NOT_EQUAL((write_memory("-d FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((write_memory("-a89 1234 AB")), 1);
 
 	/*test the write_memory function with incorrect address*/
 	CU_ASSERT_NOT_EQUAL((write_memory("-a FFFF AB")), 1);
@@ -62,9 +70,17 @@ void test_read_function(void)
 	CU_ASSERT_EQUAL((read_memory("-b 1 3")),1);
     CU_ASSERT_EQUAL((read_memory("-b 3 6")),1);
 
+	/*test the read_memory function with incorrect offset flag*/
+    CU_ASSERT_NOT_EQUAL((read_memory("-c 11 2")),1);
+    CU_ASSERT_NOT_EQUAL((read_memory("-b0 100 11")),1);
+
     /*test the read_memory function with incorrect offset number*/
     CU_ASSERT_NOT_EQUAL((read_memory("-b 11 2")),1);
     CU_ASSERT_NOT_EQUAL((read_memory("-b 100 11")),1);
+
+	/*test the read_memory function with incorrect address flag*/
+    CU_ASSERT_NOT_EQUAL((read_memory("-d FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((read_memory("-a00 1234 AB")), 1);
 
     /*test the read_memory function with incorrect address*/
     CU_ASSERT_NOT_EQUAL((read_memory("-a FFFF AB")), 1);
@@ -78,12 +94,20 @@ void test_read_function(void)
 void test_invert_function(void)
 {
     /*test the invert_memory function with valid set of parameters*/
-    CU_ASSERT_EQUAL((invert_memory("-b 1 3")),1);
-    CU_ASSERT_EQUAL((invert_memory("-b 3 6")),1);
+    CU_ASSERT_EQUAL((invert_memory("-b 1 3")), 1);
+    CU_ASSERT_EQUAL((invert_memory("-b 3 6")), 1);
+
+	/*test the invert_memory function with incorrect offset flag*/
+    CU_ASSERT_NOT_EQUAL((invert_memory("-z 11 2")), 1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-0b0 100 11")), 1);
 
     /*test the invert_memory function with incorrect offset number*/
-    CU_ASSERT_NOT_EQUAL((invert_memory("-b 11 2")),1);
-    CU_ASSERT_NOT_EQUAL((invert_memory("-b 100 11")),1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-b 11 2")), 1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-b 100 11")), 1);
+
+	/*test the invert_memory function with incorrect address flag*/
+    CU_ASSERT_NOT_EQUAL((invert_memory("-p FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((invert_memory("-3a 1234 AB")), 1);
 
     /*test the invert_memory function with incorrect address*/
     CU_ASSERT_NOT_EQUAL((invert_memory("-a FFFF AB")), 1);
@@ -97,12 +121,20 @@ void test_invert_function(void)
 void test_wrpattern_function(void)
 {
     /*test the write_pattern function with valid set of parameters*/
-    CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")),1);
-    CU_ASSERT_EQUAL((write_pattern("-b 3 6 102")),1);
+    CU_ASSERT_EQUAL((write_pattern("-b 1 3 102")), 1);
+    CU_ASSERT_EQUAL((write_pattern("-b 3 6 102")), 1);
+
+	/*test the write_pattern function with incorrect offset flag*/
+    CU_ASSERT_NOT_EQUAL((write_pattern("-k 11 2 102")), 1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b' 100 11 102")), 1);
 
     /*test the write_pattern function with incorrect offset number*/
-    CU_ASSERT_NOT_EQUAL((write_pattern("-b 11 2 102")),1);
-    CU_ASSERT_NOT_EQUAL((write_pattern("-b 100 11 102")),1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b 11 2 102")), 1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-b 100 11 102")), 1);
+
+	/*test the write_pattern function with incorrect address flag*/
+    CU_ASSERT_NOT_EQUAL((write_pattern("-q FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((write_pattern("-a= 1234 AB")), 1);
 
     /*test the write_pattern function with incorrect address*/
     CU_ASSERT_NOT_EQUAL((write_pattern("-a FFFF AB")), 1);
@@ -116,20 +148,28 @@ void test_wrpattern_function(void)
 void test_vpattern_function(void)
 {
 	/*test the verify_pattern function with valid set of parameters*/
-    CU_ASSERT_EQUAL((verify_pattern("-b 1 3 102")),1);
-    CU_ASSERT_EQUAL((verify_pattern("-b 3 6 102")),1);
+    CU_ASSERT_EQUAL((verify_pattern("-b 1 3 102")), 1);
+    CU_ASSERT_EQUAL((verify_pattern("-b 3 6 102")), 1);
+
+	/*test the verify_pattern function with incorrect offset flag*/
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-v 11 2 102")), 1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("=b 100 11 102")), 1);
 
     /*test the verify_pattern function with incorrect offset number*/
-    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 102")),1);
-    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 102")),1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 102")), 1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 102")), 1);
+
+	/*test the verify_pattern function with incorrect address flag*/
+    CU_ASSERT_NOT_EQUAL((verify_pattern("~a FFFF AB")), 1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-A 1234 AB")), 1);
 
     /*test the verify_pattern function with incorrect address*/
     CU_ASSERT_NOT_EQUAL((verify_pattern("-a FFFF AB")), 1);
     CU_ASSERT_NOT_EQUAL((verify_pattern("-a 1234 AB")), 1);
 
     /*test the verify_pattern function with incorrect seed value*/
-    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 111")),1);
-    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 12")),1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 11 2 111")), 1);
+    CU_ASSERT_NOT_EQUAL((verify_pattern("-b 100 11 12")), 1);
 
     /*test if global variables are not overwritten*/
     CU_ASSERT_PTR_NOT_EQUAL(NULL, g_blockptr);

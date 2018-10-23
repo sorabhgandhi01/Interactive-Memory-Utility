@@ -55,7 +55,7 @@ mem_status write_pattern(char arg[])
     }
 
 
-	if ((flag[0] == '-') && (flag[1] == 'a')) {
+	if ((strcmp(flag, "-a")) == 0) {
 
 		uint64_t useraddr = chtol(addr); // Converts string to long
 		uint32_t block = chtoi(r_bytes); // Converts string to integer
@@ -113,7 +113,7 @@ mem_status write_pattern(char arg[])
 		return SUCCESS;
 	}
 	/*Check for the address flag '-b' */
-	else if ((flag[0] == '-') && (flag[1] == 'b')) {
+	else if ((strcmp(flag, "-b")) == 0) {
         
 		uint32_t offset = chtoi(addr);
         uint32_t block = chtoi(r_bytes);

@@ -46,7 +46,7 @@ mem_status write_memory(char arg[])
 		return FAILED;
 	}
 
-	if ((flag[0] == '-') && (flag[1] == 'a')) {
+	if ((strcmp(flag, "-a")) == 0) {
 
 		uint64_t useraddr = chtol(addr);			// Converts string to long
 		uint32_t data = chtoi(hex_data); 			// Converts string to integer
@@ -74,7 +74,7 @@ mem_status write_memory(char arg[])
 		return SUCCESS;
 
 	} 
-	else if ((flag[0] == '-') && (flag[1] == 'b')) {
+	else if ((strcmp(flag, "-b")) == 0) {
 
 		uint32_t offset = chtoi(addr);		//Converts string to long
 		uint32_t data = chtoi(hex_data);	//Converts string to int
