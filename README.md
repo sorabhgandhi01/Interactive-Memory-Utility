@@ -52,7 +52,8 @@ BUILD and RUN STEPS
 	===================
 	1.) Go to the project folder, cd [FolderName]/  
 	2.) Run make (This command compiles the code and generates an respective executable)
-	3.) Run make test (This command compiles the code,  generates the executabtable and runs the code using the test script)
+	3.) Run make test (This command compiles the code,  generates the executabtable and runs the code 
+	using the test script)
 
 	RUN STEPS  
 	=========  
@@ -60,7 +61,8 @@ BUILD and RUN STEPS
 
 	UNIT TEST RUN STEPS
 	===================
-	1.) First install all the Unit-test dependency using the command - sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
+	1.) First install all the Unit-test dependency using the command - 
+		sudo apt-get install libcunit1 libcunit1-doc libcunit1-dev
 	2.) Go to the UnitTests folder using the command - cd UnitTests
 	3.) Run make
 	4.) ./unittest
@@ -74,19 +76,24 @@ LIST OF MEMORY MANIPULATION COMMANDS
 
 	Note :- All the input and output data to the utility command should be in hexadecimal format
 
-	allocate [N blocks] - This command is used to dynamically allocate memory according to the user entered number of blocks.
+	allocate [N blocks] - This command is used to dynamically allocate memory according to the 
+			      user entered number of blocks.
 
 	free - Frees the dynamically allocated memory.
 
-	read [flag] [arg] [N block size] - This command is used to read data starting from a user specified address until the user specified block size.
+	read [flag] [arg] [N block size] - This command is used to read data starting from a user 
+					   specified address until the user specified block size.
 
 	write [flag] [arg] [data] - This command is used to write data at a user specified memory address.
 
-	invert [flag] [arg] [N block size] - This command is used to invert the memory contents starting from the user specified address until the user specified number of blocks.
+	invert [flag] [arg] [N block size] - This command is used to invert the memory contents starting 
+				from the user specified address until the user specified number of blocks.
 
-	wpattern [flag] [arg] [N block size] [seed] - This command is used to write pseudo random numbers starting at the user specified address until the user specified block size.
+	wpattern [flag] [arg] [N block size] [seed] - This command is used to write pseudo random numbers 
+				starting at the user specified address until the user specified block size.
 
-	vpattern [flag] [arg] [N block size] [seed] - This command is used to verify the pseudo random numbers starting at the user specified address until the user specified block size.
+	vpattern [flag] [arg] [N block size] [seed] - This command is used to verify the pseudo random 
+			numbers starting at the user specified address until the user specified block size.
 
 	exit - Close the program
 
